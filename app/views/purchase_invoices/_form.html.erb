@@ -1,0 +1,57 @@
+<%= form_with(model: purchase_invoice, class: "contents") do |form| %>
+  <% if purchase_invoice.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(purchase_invoice.errors.count, "error") %> prohibited this purchase_invoice from being saved:</h2>
+
+      <ul>
+        <% purchase_invoice.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :company_id %><br>
+    <%= form.collection_select :company_id, Company.all, :id, :to_s, prompt: true  %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :issued_on %>
+    <%= form.date_field :issued_on, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :supplier %>
+    <%= form.text_field :supplier, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :reference %>
+    <%= form.text_field :reference, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :payment_account_id %><br>
+    <%= form.collection_select :payment_account_number, Account.all, :number, :to_s, prompt: true  %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :paid_on %>
+    <%= form.date_field :paid_on, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :attachment %>
+    <%= form.file_field :attachment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<div id="<%= dom_id purchase_invoice_line %>">
+  <% if action_name != "show" %>
+    <%= link_to "Show this purchase invoice line", purchase_invoice_line, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this purchase invoice line', edit_purchase_invoice_line_path(purchase_invoice_line), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

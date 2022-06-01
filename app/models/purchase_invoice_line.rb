@@ -1,0 +1,2 @@
+class PurchaseInvoiceLine < ApplicationRecord
+end
