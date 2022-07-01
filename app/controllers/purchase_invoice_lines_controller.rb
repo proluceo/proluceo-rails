@@ -53,6 +53,6 @@ class PurchaseInvoiceLinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_invoice_line_params
-      params.fetch(:purchase_invoice_line, {})
+      params.require(:purchase_invoice_line).permit(:company_id, :account_number_id, :amount, :tax_rate, :tax_account_number_id)
     end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-100">
   <head>
-    <title>ProluceoRails</title>
+    <title>Proluceo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,9 +11,48 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="h-full">
+    <div data-controller="slideover"
+         data-slideover-invisible-class="-translate-x-full,opacity-0"
+         data-slideover-visible-class="translate-x-0,opacity-100"
+         data-slideover-entering-class=""
+         data-slideover-enter-timeout="300,300"
+         data-slideover-leaving-class=""
+         data-slideover-leave-timeout="300,300"
+         data-slideover-active-target="#slideover-target">
+      <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+      <%= render 'shared/nav/mobile_menu' %>
+
+      <!-- Static sidebar for desktop -->
+      <%= render 'shared/nav/static_sidebar' %>
+
+      <div class="md:pl-64 flex flex-col flex-1">
+        <div class="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-100">
+          <button data-action="slideover#_show" type="button" class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open sidebar</span>
+            <!-- Heroicon name: outline/menu -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        <main class="flex-1">
+          <div class="py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+              <!-- Replace with your content -->
+              <div class="py-4">
+                <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
+                  <%= yield %>
+                </div>
+              </div>
+              <!-- /End replace -->
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
