@@ -3,7 +3,7 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
+  <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
     <h1 class="font-bold text-4xl">Purchase invoice lines</h1>
     <%= link_to 'New purchase invoice line', new_purchase_invoice_line_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
@@ -12,3 +12,4 @@
     <%= render @purchase_invoice_lines %>
   </div>
 </div>
+
