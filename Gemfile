@@ -33,6 +33,12 @@ gem "tailwindcss-rails"
 # Use heroicon [https://github.com/bharget/heroicon]
 gem "heroicon"
 
+# Use github view_components [https://github.com/github/view_component]
+gem "view_component", "~> 2.57"
+
+# Use github primer view components
+# gem "primer_view_components"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -72,4 +78,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-

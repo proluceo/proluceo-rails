@@ -35,3 +35,4 @@ module ProluceoRails
     config.generators.system_tests = nil
   end
 end
+require "view_component"

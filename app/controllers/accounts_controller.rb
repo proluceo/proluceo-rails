@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+
   before_action :set_account, only: %i[ show edit update destroy ]
 
   # GET /accounts
@@ -24,7 +25,11 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
 
     if @account.save
-      redirect_to @account, notice: "Account was successfully created."
+      respond_to do |format|
+        format.turbo_stream
+        format.html         { redirect_to @account, notice: "Account was successfully created." }
+      end
+
     else
       render :new, status: :unprocessable_entity
     end

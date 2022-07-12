@@ -4,6 +4,6 @@ class Account < ApplicationRecord
   has_many :purchase_invoices, class_name: 'PurchaseInvoice', foreign_key: [:company_id, :number]
 
   def to_s
-    number.to_s
+    number.to_s + ' ' + label
   end
 end
