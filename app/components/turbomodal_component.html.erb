@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal" do %>
   <!-- Modal Inner Container -->
-  <div class="max-h-screen w-full max-w-lg relative" data-controller="turbomodal" data-action="turbo:frame-load@window->modal#open turbo:submit-end@window->turbomodal#submitEnd turbomodal:close->modal#close >
+  <div class="max-h-screen w-full max-w-lg relative" data-controller="turbomodal" data-action="turbo:frame-load@window->modal#open turbo:submit-end@window->turbomodal#submitEnd turbomodal#close->modal#close">
     <!-- Modal Card -->
     <div class="m-1 bg-white rounded shadow" ">
       <div class="p-8">
