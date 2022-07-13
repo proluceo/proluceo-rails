@@ -1,14 +1,16 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<%= turbo_frame_tag 'companies' do %>
+  <div class="w-full">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
 
-  <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Companies</h1>
-    <%= link_to 'New company', new_company_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
+    <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
+      <h1 class="font-bold text-4xl">Companies</h1>
+      <%= link_to 'New company', new_company_path, data: { turbo_frame: 'modal' }, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    </div>
 
-  <div id="companies" class="min-w-full">
-    <%= render @companies %>
+    <div id="companies" class="min-w-full">
+      <%= render @companies %>
+    </div>
   </div>
-</div>
+<% end %>

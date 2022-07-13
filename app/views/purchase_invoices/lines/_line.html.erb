@@ -1,0 +1,9 @@
+<tr id="<%= dom_id line %> class="border-b border-gray-200">
+  <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0 font-medium text-gray-900"><%= line.account.label %> </td>
+  <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= line.amount %></td>
+  <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= line.tax_rate %></td>
+  <td class="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0"><%= line.tax_account.label %></td>
+  <td class="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0"><%= line.after_tax %></td>
+</tr>
+
+

@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :company_id %><br>
-    <%= form.collection_select :company_id, Company.all, :id, :name, prompt: true  %>
-  </div>
-
-  <div class="my-5">
     <%= form.label :number %>
     <%= form.number_field :number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>

@@ -1,5 +1,4 @@
 class AccountsController < ApplicationController
-
   before_action :set_account, only: %i[ show edit update destroy ]
 
   # GET /accounts
@@ -58,6 +57,7 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:company_id, :number, :label)
+      params.require(:account).permit(:number, :label)
     end
+    include CompanyDependent
 end

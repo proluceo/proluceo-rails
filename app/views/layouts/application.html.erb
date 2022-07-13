@@ -12,6 +12,10 @@
   </head>
 
   <body class="h-full">
+    <!-- Modal Container -->
+    <div data-modal-target="container" data-controller="modal" data-modal-allow-background-close="false" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+      <%= turbo_frame_tag "modal" %>
+    </div>
     <div data-controller="slideover"
          data-slideover-invisible-class="-translate-x-full,opacity-0"
          data-slideover-visible-class="translate-x-0,opacity-100"
@@ -41,12 +45,8 @@
             <div class="mx-auto px-4 sm:px-6 md:px-8">
               <!-- Replace with your content -->
               <div class="py-4">
-                <div class="border-4 border-dashed border-gray-200 rounded-lg h-96" data-controller="modal" data-modal-allow-background-close="false">
+                <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
                   <%= yield %>
-                  <!-- Modal Container -->
-                  <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
-                    <%= turbo_frame_tag "modal" %>
-                  </div>
                 </div>
               </div>
               <!-- /End replace -->

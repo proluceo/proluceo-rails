@@ -1,9 +1,9 @@
-class PurchaseInvoiceLinesController < ApplicationController
+class PurchaseInvoices::LinesController < ApplicationController
   before_action :set_purchase_invoice_line, only: %i[ show edit update destroy ]
 
   # GET /purchase_invoice_lines
   def index
-    @purchase_invoice_lines = PurchaseInvoiceLine.all
+    @lines = PurchaseInvoiceLine.all
   end
 
   # GET /purchase_invoice_lines/1
@@ -12,7 +12,7 @@ class PurchaseInvoiceLinesController < ApplicationController
 
   # GET /purchase_invoice_lines/new
   def new
-    @purchase_invoice_line = PurchaseInvoiceLine.new
+    @line = PurchaseInvoiceLine.new
   end
 
   # GET /purchase_invoice_lines/1/edit
@@ -21,10 +21,10 @@ class PurchaseInvoiceLinesController < ApplicationController
 
   # POST /purchase_invoice_lines
   def create
-    @purchase_invoice_line = PurchaseInvoiceLine.new(purchase_invoice_line_params)
+    @line = PurchaseInvoiceLine.new(purchase_invoice_line_params)
 
-    if @purchase_invoice_line.save
-      redirect_to @purchase_invoice_line, notice: "Purchase invoice line was successfully created."
+    if @line.save
+      redirect_to @line, notice: "Purchase invoice line was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,8 +32,8 @@ class PurchaseInvoiceLinesController < ApplicationController
 
   # PATCH/PUT /purchase_invoice_lines/1
   def update
-    if @purchase_invoice_line.update(purchase_invoice_line_params)
-      redirect_to @purchase_invoice_line, notice: "Purchase invoice line was successfully updated."
+    if @line.update(purchase_invoice_line_params)
+      redirect_to @line, notice: "Purchase invoice line was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,14 +41,14 @@ class PurchaseInvoiceLinesController < ApplicationController
 
   # DELETE /purchase_invoice_lines/1
   def destroy
-    @purchase_invoice_line.destroy
+    @line.destroy
     redirect_to purchase_invoice_lines_url, notice: "Purchase invoice line was successfully destroyed."
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_invoice_line
-      @purchase_invoice_line = PurchaseInvoiceLine.find(params[:id])
+      @line = PurchaseInvoiceLine.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

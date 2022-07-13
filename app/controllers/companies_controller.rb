@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[ show edit update destroy ]
+  before_action :set_company, only: %i[ show edit update destroy select ]
 
   # GET /companies
   def index
@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to @company, notice: "Company was successfully created."
+      redirect_to companies_path, notice: "Company was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,6 +43,12 @@ class CompaniesController < ApplicationController
   def destroy
     @company.destroy
     redirect_to companies_url, notice: "Company was successfully destroyed."
+  end
+
+  # GET /companies/1/select
+  def select
+    session[:company] = @company.id
+    redirect_to action: :index
   end
 
   private

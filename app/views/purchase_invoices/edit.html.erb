@@ -3,6 +3,7 @@
 
   <%= render "form", purchase_invoice: @purchase_invoice %>
 
-  <%= link_to "Show this purchase invoice", @purchase_invoice, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   <%= link_to "Back to purchase invoices", purchase_invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>
+
+<%= turbo_frame_tag 'purchase_invoice_lines', src: purchase_invoice_lines_path(@purchase_invoice) %>

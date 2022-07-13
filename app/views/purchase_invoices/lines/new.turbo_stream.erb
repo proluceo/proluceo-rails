@@ -1,0 +1,3 @@
+<%= turbo_stream.update "accounts" do %>
+  <%= options_from_collection_for_select(Account.all, :number, :to_s, @account.number) %>
+<% end %>
