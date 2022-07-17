@@ -24,7 +24,7 @@ class PurchaseInvoicesController < ApplicationController
     @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params)
 
     if @purchase_invoice.save
-      redirect_to @purchase_invoice, notice: "Purchase invoice was successfully created."
+      redirect_to edit_purchase_invoice_path(@purchase_invoice), notice: "Purchase invoice was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -59,7 +59,7 @@ class PurchaseInvoicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_invoice_params
-      params.require(:purchase_invoice).permit(:company_id, :issued_on, :supplier, :reference, :amount, :payment_account_number, :paid_on, :attachment)
+      params.require(:purchase_invoice).permit(:issued_on, :supplier, :reference, :payment_account_number, :paid_on, :attachment, :currency)
     end
   include CompanyDependent
 end

@@ -13,6 +13,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
+    @target = params[:target]
   end
 
   # GET /accounts/1/edit
@@ -22,6 +23,7 @@ class AccountsController < ApplicationController
   # POST /accounts
   def create
     @account = Account.new(account_params)
+    @target = params[:target]
 
     if @account.save
       respond_to do |format|

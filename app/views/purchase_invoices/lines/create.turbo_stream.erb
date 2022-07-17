@@ -1,0 +1,22 @@
+<% if @line.errors.any? %>
+  <%= turbo_stream.update 'errors' do %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(@line.errors.count, "error") %> prohibited this line from being saved:</h2>
+
+      <ul>
+        <% @line.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace(newline=PurchaseInvoiceLine.new) do %>
+    <%= render PurchaseInvoiceLineComponent.new(line: @line, editable: true) %>
+  <% end %>
+  <%= turbo_stream.append 'purchase_invoice_lines' do %>
+    <%= render PurchaseInvoiceLineComponent.new(line: newline, editable: true) %>
+  <% end %>
+
+
+<% end %>

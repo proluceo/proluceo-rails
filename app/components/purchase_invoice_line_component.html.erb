@@ -1,0 +1,21 @@
+<li id="<%= dom_id(@line) %>">
+  <%= form_with(model: @line, class: "contents", data: { controller: (@line.persisted? ? 'autosave' : ''), autosave_debounce_value: 1000}) do |form| %>
+    <div class="grid grid-cols-6 divide-x">
+      <p class="text-sm font-medium text-grey-900 truncate">
+        <%= form.collection_select :account_number, Account.all, :number, :to_s, { prompt: false }, { id: "#{dom_id(@line)}_account_number", data: { action: 'autosave#save'}}  %>
+        <%= link_to "New", new_account_path(target: "#{dom_id(@line)}_account_number"), data: { turbo_frame: 'modal' } %>
+      </p>
+      <p class="text-sm font-medium text-grey-900 truncate"><%= form.text_field :amount, { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", data: { action: 'autosave#save'}} %></p>
+      <p class="text-sm font-medium text-grey-900 truncate"><%= form.text_field :tax_rate, { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", data: { action: 'autosave#save'}} %></p>
+      <p class="text-sm font-medium text-grey-900 truncate">
+        <%= form.collection_select :tax_account_number, Account.all, :number, :to_s, {prompt: false}, { id: "#{dom_id(@line)}_tax_account_number", data: { action: 'autosave#save'}}  %>
+        <%= link_to "New", new_account_path(target: "#{dom_id(@line)}_tax_account_number"), data: { turbo_frame: 'modal' } %>
+      </p>
+      <p class="text-sm font-medium text-grey-900 truncate"><%= @line.amount_with_tax %></p>
+      <div>
+        <%= form.submit class: "text-indigo-600 hover:text-indigo-900", value: (@line.persisted? ? '' : 'Add') %>
+        <%= @line.persisted? ? link_to('Delete', purchase_invoice_line_path(@line), method: :delete, data: { 'turbo-method': :delete }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium") : ''%>
+      </div>
+    </div>
+  <% end %>
+</li>

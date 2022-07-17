@@ -35,7 +35,7 @@
     <%= link_to 'Attachment', attachment_purchase_invoice_path(purchase_invoice) if purchase_invoice.attachment_present %>
   </p>
 
-  <% if action_name != "show" %>
+  <% if action_name == "index" %>
     <%= link_to "Show this purchase invoice", purchase_invoice, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this purchase invoice', edit_purchase_invoice_path(purchase_invoice), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">

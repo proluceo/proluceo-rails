@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
 
   resources :purchase_invoices, nav: { icon: 'document-text' } do
-    scope module: 'purchase_invoices' do
-      resources :lines
-    end
+    resources :lines, module: 'purchase_invoices', only: [:create, :index]
     get :attachment, on: :member
   end
+
+  resource :purchase_invoice, only: [] do
+    resources :lines, only: [:show, :update, :destroy], module: 'purchase_invoices'
+  end
+
+
   resources :journal_entries, nav: { icon: 'book-open' }
   resources :accounts, nav: { icon: 'folder-open' }
   resources :companies, nav: { icon: 'library' } do
