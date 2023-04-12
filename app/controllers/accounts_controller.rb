@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.all
+    @accounts = Account.companys
   end
 
   # GET /accounts/1

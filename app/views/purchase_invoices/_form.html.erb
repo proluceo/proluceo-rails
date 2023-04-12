@@ -33,7 +33,7 @@
 
   <div class="my-5">
     <%= form.label :payment_account_id %><br>
-    <%= form.collection_select :payment_account_number, Account.all, :number, :to_s, { prompt: true }, { id: 'accounts'}  %>
+    <%= form.collection_select :payment_account_number, Account.companys, :number, :to_s, { prompt: true }, { id: 'accounts'}  %>
     <%= link_to "New account", new_account_path(target: 'accounts'), data: { turbo_frame: 'modal' } %>
   </div>
 

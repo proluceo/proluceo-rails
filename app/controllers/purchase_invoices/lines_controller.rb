@@ -4,7 +4,7 @@ class PurchaseInvoices::LinesController < ApplicationController
   # GET /purchase_invoice_lines
   def index
     @purchase_invoice = PurchaseInvoice.find(params[:purchase_invoice_id])
-    @lines = PurchaseInvoiceLine.all
+    @lines = PurchaseInvoiceLine.companys
   end
 
   # POST /purchase_invoice_lines

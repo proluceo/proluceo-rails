@@ -3,7 +3,7 @@ class JournalEntriesController < ApplicationController
 
   # GET /journal_entries
   def index
-    @journal_entries = JournalEntry.all
+    @journal_entries = JournalEntry.companys
   end
 
   # GET /journal_entries/1

@@ -26,7 +26,7 @@
     <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
 <% elsif attribute.reference? -%>
     <%%= form.label :<%= attribute.column_name %> %><br>
-    <%%= form.collection_select :<%= attribute.column_name %>, <%= attribute.name.camelize %>.all, :id, :to_s, prompt: true  %>
+    <%%= form.collection_select :<%= attribute.column_name %>, <%= attribute.name.camelize %>.companys, :id, :to_s, prompt: true  %>
 <% else -%>
     <%%= form.label :<%= attribute.column_name %> %>
 <% if attribute.field_type == :text_area -%>
