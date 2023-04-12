@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  resources :documents
   resources :purchase_invoices, nav: { icon: 'document-text' } do
     resources :lines, module: 'purchase_invoices', only: [:create, :index]
     get :attachment, on: :member
@@ -12,10 +12,13 @@ Rails.application.routes.draw do
 
   resources :journal_entries, nav: { icon: 'book-open' }
   resources :accounts, nav: { icon: 'folder-open' }
-  resources :companies, nav: { icon: 'library' } do
+  resources :companies, nav: { icon: 'building-office-2' } do
     get :select, on: :member
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  resources :documents, only: [:index, :new, :create, :show], nav: { icon: 'archive-box' } do
+    get :attachment, on: :member
+  end
 
   # Defines the root path route ("/")
   root "companies#index"

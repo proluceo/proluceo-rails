@@ -1,0 +1,12 @@
+<div id="<%= dom_id document %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Company:</strong>
+    <%= document.created_at %>
+    <%= document.meta['filename'] %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Process this document", new_purchase_invoice_path(document_id: document), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
