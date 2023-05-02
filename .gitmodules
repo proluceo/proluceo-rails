@@ -1,0 +1,3 @@
+[submodule "public/stimulus-dropzone"]
+	path = public/stimulus-dropzone
+	url = https://github.com/proluceo/stimulus-dropzone
