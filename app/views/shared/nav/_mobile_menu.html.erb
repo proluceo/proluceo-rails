@@ -49,15 +49,19 @@
             <%= image_tag "logo-white.svg", alt: "ReTok Logo", class: "h-8 w-auto" %>
           </div>
           <nav class="mt-5 px-2 space-y-1">
-            <% Rails.application.routes.resources_nav.each do |section| %>
+            <% Rails.application.routes.resources_nav.reject{ |r| r.name == :documents }.each do |section| %>
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <%= link_to Rails.application.routes.url_helpers.send("#{section}_path"), class: (controller.controller_name == section.to_s ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white') + ' group flex items-center px-2 py-2 text-base font-medium rounded-md' do %>
                 <!--
                   Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300"
                 -->
-                <%= heroicon "search", options: { class: (controller.controller_name == section.to_s ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300') + ' mr-4 flex-shrink-0 h-6 w-6', viewBox: "0 0 24 24" } %>
+                <%= heroicon section.icon, options: { class: (controller.controller_name == section.to_s ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300') + ' mr-4 flex-shrink-0 h-6 w-6', viewBox: "0 0 24 24" } %>
                 <%= section.to_s.titleize %>
               <% end %>
+            <% end %>
+            <%= link_to new_document_path, class: (controller.controller_name == 'documents' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white') + ' group flex items-center px-2 py-2 text-base font-medium rounded-md' do %>
+              <%= heroicon "archive-box", options: { class: (controller.controller_name == 'documents' ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300') + ' mr-4 flex-shrink-0 h-6 w-6', viewBox: "0 0 24 24" } %>
+              New Document
             <% end %>
           </nav>
         </div>
