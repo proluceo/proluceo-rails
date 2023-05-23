@@ -24,10 +24,10 @@ class DocumentsController < ApplicationController
       if @document.save
         render json: { result: :ok }, status: :created
       else
-        render json: { result: :error }, status: :unprocessable_entity
+        render json: { error: "An error occured while uploading this file. Please try to upload it again." }, status: :unprocessable_entity
       end
-    rescue ActiveRecord::RecordNotUnique
-      render json: { result: :already_exists }, status: :unprocessable_entity
+    rescue ActiveRecord::RecordNotUnique => e
+      render json: { error: "This file was already uploaded." }, status: :unprocessable_entity
     end
   end
 
