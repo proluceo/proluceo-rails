@@ -3,7 +3,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # GET /purchase_invoices
   def index
-    @purchase_invoices = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :payment_account_number, :attachment_present, :issued_on, :supplier, :reference, :amount, :paid_on)
+    @purchase_invoices = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier, :reference, :amount, :paid_on)
   end
 
   # GET /purchase_invoices/1
@@ -12,7 +12,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # GET /purchase_invoices/new
   def new
-    @purchase_invoice = PurchaseInvoice.new
+    @purchase_invoice = PurchaseInvoice.new(document_id: params[:document_id])
   end
 
   # GET /purchase_invoices/1/edit
@@ -45,21 +45,15 @@ class PurchaseInvoicesController < ApplicationController
     redirect_to purchase_invoices_url, notice: "Purchase invoice was successfully destroyed."
   end
 
-  # GET /purchase_invoice/1/attachment
-  def attachment
-    purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :attachment_blob).find(params[:id])
-    send_data purchase_invoice.attachment_blob, filename: "purchase_invoice-#{purchase_invoice.id}.pdf", type: "application/pdf"
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_invoice
-      @purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :attachment_present, :payment_account_number, :issued_on, :supplier, :reference, :amount, :paid_on).find(params[:id])
+      @purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :document_id, :payment_account_number, :issued_on, :supplier, :reference, :amount, :paid_on).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def purchase_invoice_params
-      params.require(:purchase_invoice).permit(:issued_on, :supplier, :reference, :payment_account_number, :paid_on, :attachment, :currency)
+      params.require(:purchase_invoice).permit(:issued_on, :supplier, :reference, :payment_account_number, :paid_on, :document_id, :currency)
     end
   include CompanyDependent
 end

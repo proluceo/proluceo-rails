@@ -1,21 +1,14 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[show edit update destroy]
 
   # GET /documents
   def index
-    @documents = Document.companys.where(processed: false)
-  end
-
-  # GET /documents/1
-  def show
-    send_data @document.attachment_blob, filename: "document-#{@document.id}.pdf", type: "application/pdf", disposition: :inline
+    redirect_to action: :new
   end
 
   # GET /documents/new
   def new
     @document = Document.new
   end
-
 
   # POST /documents
   def create
@@ -31,12 +24,13 @@ class DocumentsController < ApplicationController
     end
   end
 
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_document
+  # GET /documents/1
+  def show
     @document = Document.find(params[:id])
+    send_data @document.attachment_blob, filename: "document-#{@document.id}.pdf", type: "application/pdf", disposition: :inline
   end
+
+  private
 
   # Only allow a list of trusted parameters through.
   def document_params

@@ -10,9 +10,9 @@
     <%= link_to 'Back to purchase invoices', purchase_invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 
-  <% if params[:document_id] %>
+  <% if @purchase_invoice.document_id %>
     <div class="mx-auto w-full">
-      <%= content_tag :iframe, '', src: document_path(params[:document_id]), width: '100%', height: '1000px' %>
+      <%= content_tag :iframe, '', src: document_path(@purchase_invoice.document_id), width: '100%', height: '1000px' %>
     </div>
   <% end %>
 </div>

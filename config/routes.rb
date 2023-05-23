@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :documents
+  resources :documents, only: [:index, :new, :create, :show]
   resources :purchase_invoices, nav: { icon: 'document-text' } do
     resources :lines, module: 'purchase_invoices', only: [:create, :index]
     get :attachment, on: :member
