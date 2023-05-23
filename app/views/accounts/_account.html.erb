@@ -1,22 +1,9 @@
-<div id="<%= dom_id account %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Company:</strong>
-    <%= account.company_id %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Number:</strong>
-    <%= account.number %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Label:</strong>
-    <%= account.label %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this account", account, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this account', edit_account_path(account), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+<tr id="<%= dom_id account %>">
+  <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6"><%= account.company_id %></td>
+  <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">C<%= account.number %></td>
+  <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900"><%= account.label %></td>
+  <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+    <%= link_to 'Edit', edit_account_path(account), class: "text-blue-600 hover:text-blue-900" %>
+    <%= link_to 'Ledger', purchase_invoices_path(account_id: dom_id(account)), class: "text-blue-600 hover:text-blue-900 ml-2" %>
+  </td>
+</tr>

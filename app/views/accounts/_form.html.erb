@@ -12,17 +12,18 @@
     </div>
   <% end %>
 
+  
   <div class="my-5">
-    <%= form.label :number %>
-    <%= form.number_field :number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :number, class: "label" %>
+    <%= form.number_field :number, class: "input sm:w-1/2" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :label %>
-    <%= form.text_field :label, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :label, class: "label" %>
+    <%= form.text_field :label, class: "input sm:w-1/2" %>
   </div>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  <div class="border-t border-gray-200">
+    <%= form.submit class: "btn-primary mt-5" %>
   </div>
 <% end %>
