@@ -11,3 +11,4 @@ pin "dropzone", to: "https://ga.jspm.io/npm:dropzone@6.0.0-beta.1/dist/dropzone.
 pin "stimulus-dropzone", to: "/stimulus-dropzone/src/index.js"
 pin "just-extend", to: "https://ga.jspm.io/npm:just-extend@5.1.1/index.esm.js"
 pin "@kanety/stimulus-static-actions", to: "https://ga.jspm.io/npm:@kanety/stimulus-static-actions@1.0.1/dist/index.modern.js"
+pin "stimulus-autocomplete", to: "https://ga.jspm.io/npm:stimulus-autocomplete@3.1.0/src/autocomplete.js"

@@ -24,7 +24,13 @@ class PurchaseInvoicesController < ApplicationController
     @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params)
 
     if @purchase_invoice.save
-      redirect_to edit_purchase_invoice_path(@purchase_invoice), notice: "Purchase invoice was successfully created."
+      if @purchase_invoice.document_id and Document.unprocessed.any?
+        redirect_to new_purchase_invoice_path(document_id: Document.unprocessed.first)
+      elsif @purchase_invoice.document_id and Document.unprocessed.empty?
+        redirect_to purchase_invoices_path, notice: "There is no more document to process."
+      else
+        redirect_to edit_purchase_invoice_path(@purchase_invoice), notice: "Purchase invoice was successfully created."
+      end
     else
       render :new, status: :unprocessable_entity
     end

@@ -6,11 +6,15 @@
 
 @layer components {
   .btn-primary {
-    @apply rounded-lg py-2.5 px-3.5 bg-blue-600 text-white font-medium hover:bg-blue-500;
+    @apply rounded-lg py-2.5 px-3.5 bg-blue-600 text-white font-medium hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
   }
 
   .btn-white {
     @apply rounded-lg py-2.5 px-3.5 bg-white text-gray-900 shadow-sm font-medium ring-1 ring-inset ring-gray-300 hover:bg-gray-50
+  }
+
+  .link {
+    @apply text-blue-700 hover:text-blue-800 hover:underline;
   }
 
   .heading-1 {
@@ -23,6 +27,10 @@
 
   .input {
     @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full;
+  }
+
+  ul li.list-group-item.active {
+    @apply bg-blue-600 text-white;
   }
 }
 

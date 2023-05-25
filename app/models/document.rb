@@ -2,6 +2,10 @@ class Document < ApplicationRecord
   self.primary_key = 'document_id'
   belongs_to :company
 
+  def self.unprocessed
+    where(processed: false)
+  end
+
   def file=(tempfile)
     self.attachment_blob = tempfile.read
     self.meta = {

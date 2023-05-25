@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get :attachment, on: :member
   end
 
+  get '/suppliers/search', to: 'suppliers#search'
+
   # Defines the root path route ("/")
   root "companies#index"
 end

@@ -8,7 +8,9 @@
   <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
     <h1 class="heading-1">Purchase invoices</h1>
     <div>
-      <%= link_to 'Process Inbox', '#', class: "btn-white" %>
+      <% if Document.unprocessed.any? %>
+        <%= link_to 'Process Inbox', new_purchase_invoice_path(document_id: Document.unprocessed.first), class: "btn-white" %>
+      <% end %>
       <%= link_to 'New purchase invoice', new_purchase_invoice_path, class: "ml-2 btn-primary" %>
     </div>
   </div>

@@ -34,3 +34,6 @@ application.register("slideover", Slideover);
 
 import DropzoneController from "stimulus-dropzone";
 application.register("dropzone", DropzoneController);
+
+import { Autocomplete } from "stimulus-autocomplete";
+application.register("autocomplete", Autocomplete);
