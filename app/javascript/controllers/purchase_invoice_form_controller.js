@@ -18,7 +18,8 @@ export default class extends Controller {
       .setAttribute("value", this.issuedOnTarget.value);
   }
 
-  focusOnReference() {
+  focusOnReference(e) {
+    e.preventDefault();
     const paidOn = this.paidOnTarget.value;
     if (paidOn.length === 10 && paidOn.startsWith("2")) {
       document.getElementById("reference").focus();

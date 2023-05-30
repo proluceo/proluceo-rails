@@ -13,7 +13,7 @@
 
   <body class="h-full">
     <!-- Modal Container -->
-    <div data-modal-target="container" data-controller="modal" data-modal-allow-background-close="false" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+    <div data-modal-target="container" data-controller="modal" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
       <%= turbo_frame_tag "modal" %>
     </div>
     <div data-controller="slideover"

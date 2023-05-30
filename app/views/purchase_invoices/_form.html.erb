@@ -37,7 +37,7 @@
 
     <div class="my-6">
       <%= form.label :paid_on, class: "label" %>
-      <%= form.date_field :paid_on, class: "input", id: "paidOn", data: { 'purchase-invoice-form-target' => 'paidOn', action: 'focus->purchase-invoice-form#prefillPaidOn' } %>
+      <%= form.date_field :paid_on, class: "input", id: "paidOn", data: { 'purchase-invoice-form-target' => 'paidOn', action: 'focus->purchase-invoice-form#prefillPaidOn keydown.tab->purchase-invoice-form#focusOnReference' } %>
     </div>
 
     <div class="my-6">

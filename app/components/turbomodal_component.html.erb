@@ -1,14 +1,10 @@
 <%= turbo_frame_tag "modal" do %>
   <!-- Modal Inner Container -->
-  <div class="max-h-screen w-full max-w-lg relative" data-controller="turbomodal" data-action="turbo:frame-load@window->modal#open turbo:submit-end@window->turbomodal#submitEnd turbomodal:close->modal#close">
+  <div class="max-h-screen w-full relative" data-controller="turbomodal" data-action="turbo:frame-load@window->modal#open turbo:submit-end@window->turbomodal#submitEnd turbomodal:close->modal#close">
     <!-- Modal Card -->
-    <div class="m-1 bg-white rounded shadow" ">
-      <div class="p-8">
-        <h2 class="text-xl mb-4"><%= @title %></h2>
+    <div class="bg-gray-50 rounded-lg shadow">
+      <div class="p-12">
         <%= content %>
-        <div class="flex justify-end items-center flex-wrap mt-6">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->turbomodal#close">Close</button>
-        </div>
       </div>
     </div>
   </div>
