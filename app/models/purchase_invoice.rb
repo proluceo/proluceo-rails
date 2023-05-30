@@ -9,7 +9,7 @@ class PurchaseInvoice < ApplicationRecord
 
   def self.search(params)
     params[:query].blank? ? all : where(
-      "supplier LIKE ? OR reference LIKE ? OR issued_on LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%" 
+      "supplier LIKE ? OR reference LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%" 
     )
   end
 end
