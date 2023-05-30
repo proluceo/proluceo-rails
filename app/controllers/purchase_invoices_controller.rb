@@ -3,7 +3,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # GET /purchase_invoices
   def index
-    @purchase_invoices = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier, :reference, :amount, :paid_on)
+    @purchase_invoices = PurchaseInvoice.search(params).select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier, :reference, :amount, :paid_on)
   end
 
   # GET /purchase_invoices/1

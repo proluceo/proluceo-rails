@@ -29,6 +29,10 @@
     @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full;
   }
 
+  .input-large {
+    @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-4 mt-2 w-full;
+  }
+
   ul li.list-group-item.active {
     @apply bg-blue-600 text-white;
   }

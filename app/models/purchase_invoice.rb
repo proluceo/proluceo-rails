@@ -6,4 +6,10 @@ class PurchaseInvoice < ApplicationRecord
   has_many :lines, class_name: 'PurchaseInvoiceLine', foreign_key: [:purchase_invoice_id]
 
   #delegate :file=, to: :document
+
+  def self.search(params)
+    params[:query].blank? ? all : where(
+      "supplier LIKE ? OR reference LIKE ? OR issued_on LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%" 
+    )
+  end
 end
