@@ -1,9 +1,8 @@
-<tr id="<%= dom_id account %>">
-  <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6"><%= account.company_id %></td>
-  <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">C<%= account.number %></td>
-  <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900"><%= account.label %></td>
-  <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-    <%= link_to 'Edit', edit_account_path(account), class: "text-blue-600 hover:text-blue-900" %>
-    <%= link_to 'Ledger', purchase_invoices_path(account_id: dom_id(account)), class: "text-blue-600 hover:text-blue-900 ml-2" %>
-  </td>
-</tr>
+  <div id="<%= dom_id account %>" class="table min-w-full text-sm group hover:bg-gray-50">
+    <div class="flex justify-start items-center"><%= account.company_id %></div>
+    <div class="flex justify-start items-center">C<%= account.number %></div>
+    <%= turbo_frame_tag account do %>
+      <div><%= link_to account.label, edit_account_path(account), class: "hover:text-blue-600 hover:underline" %></div>
+    <% end %>
+    <div class="hidden group-hover:flex justify-end items-center"><%= link_to 'Ledger', purchase_invoices_path(account_id: dom_id(account)), class: "text-blue-600 hover:text-blue-900 ml-2" %></div>
+  </div>

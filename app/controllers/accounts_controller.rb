@@ -39,7 +39,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   def update
     if @account.update(account_params)
-      redirect_to @account, notice: "Account was successfully updated."
+      render @account
     else
       render :edit, status: :unprocessable_entity
     end

@@ -38,4 +38,21 @@
   }
 }
 
+.table {
+  display: grid;
+  grid-template-columns: 0.8fr 0.8fr 8fr 1fr;
+  column-gap: 2rem;
+  align-items: bottom;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-collapse: collapse;
+}
 
+turbo-frame:last-child .table {
+  border-bottom: 1px solid #ccc;
+}
+
+turbo-frame:nth-child(even) .table {
+  background: #fafafa;
+}
