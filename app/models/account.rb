@@ -9,7 +9,7 @@ class Account < ApplicationRecord
 
   def self.search(params)
     params[:query].blank? ? all : where(
-      "name ILIKE ? OR number ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%" 
+      "label ILIKE ? OR cast(number as text) ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%" 
     )
   end
 end

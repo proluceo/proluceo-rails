@@ -9,7 +9,7 @@
   </div>
 
   <div class="mt-8">
-    <%= form_with url: accounts_path, method: :get, data: { turbo_frame: "accounts", turbo_action: "advance", controller: "search", action: "input->search#submit" } do %>
+    <%= form_tag accounts_path, method: :get, data: { turbo_frame: "seacrh_accounts", turbo_action: "advance", controller: "search", action: "input->search#submit" } do %>
       <div class="relative mt-2 rounded-md shadow-sm">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <%= heroicon "magnifying-glass", options: { class: "h-5 w-5 text-gray-400" } %>
@@ -31,7 +31,7 @@
             <div><span class="sr-only">Edit</span></div>
           </div> 
          <div class="bg-white">
-            <%= turbo_frame_tag "accounts" do %>
+            <%= turbo_frame_tag "seacrh_accounts" do %>
               <%= render @accounts %>
             <% end %>
           </div>
