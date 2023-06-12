@@ -1,8 +1,8 @@
 <div class="mx-auto w-full">
   <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
     <h1 class="font-bold text-4xl">New journal entry</h1>
-    <%= link_to 'Back to journal entries', journal_entries_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
+    <%= link_to 'Back to journal entries', ledger_entries_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
   </div>
 
-  <%= render "form", journal_entry: @journal_entry %>
+  <%= render "form", ledger_entry: @ledger_entry %>
 </div>

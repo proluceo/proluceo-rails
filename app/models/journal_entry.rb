@@ -1,2 +1,2 @@
-class JournalEntry < ApplicationRecord
+class LedgerEntry < ApplicationRecord
 end

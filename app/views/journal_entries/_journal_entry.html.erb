@@ -1,7 +1,7 @@
-<div id="<%= dom_id journal_entry %>">
+<div id="<%= dom_id ledger_entry %>">
   <% if action_name != "show" %>
-    <%= link_to "Show this journal entry", journal_entry, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this journal entry', edit_journal_entry_path(journal_entry), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Show this journal entry", ledger_entry, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this journal entry', edit_ledger_entry_path(ledger_entry), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">
   <% end %>
 </div>

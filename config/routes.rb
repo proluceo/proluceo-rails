@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :journal_entries, nav: { icon: 'book-open' }
+  resources :ledger_entries, nav: { icon: 'book-open' }
   resources :accounts, nav: { icon: 'folder-open' }
   resources :companies, nav: { icon: 'building-office-2' } do
     get :select, on: :member

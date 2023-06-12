@@ -1,10 +1,10 @@
-<%= form_with(model: journal_entry, class: "contents") do |form| %>
-  <% if journal_entry.errors.any? %>
+<%= form_with(model: ledger_entry, class: "contents") do |form| %>
+  <% if ledger_entry.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(journal_entry.errors.count, "error") %> prohibited this journal_entry from being saved:</h2>
+      <h2><%= pluralize(ledger_entry.errors.count, "error") %> prohibited this ledger_entry from being saved:</h2>
 
       <ul>
-        <% journal_entry.errors.each do |error| %>
+        <% ledger_entry.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>

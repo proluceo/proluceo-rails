@@ -1,2 +1,2 @@
-module JournalEntriesHelper
+module LedgerEntriesHelper
 end

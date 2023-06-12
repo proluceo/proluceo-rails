@@ -1,58 +1,58 @@
-class JournalEntriesController < ApplicationController
-  before_action :set_journal_entry, only: %i[show edit update destroy]
+class LedgerEntriesController < ApplicationController
+  before_action :set_ledger_entry, only: %i[show edit update destroy]
 
-  # GET /journal_entries
+  # GET /ledger_entries
   def index
-    @journal_entries = JournalEntry.companys
+    @ledger_entries = LedgerEntry.companys
   end
 
-  # GET /journal_entries/1
+  # GET /ledger_entries/1
   def show; end
 
-  # GET /journal_entries/new
+  # GET /ledger_entries/new
   def new
-    @journal_entry = JournalEntry.new
+    @ledger_entry = LedgerEntry.new
   end
 
-  # GET /journal_entries/1/edit
+  # GET /ledger_entries/1/edit
   def edit; end
 
-  # POST /journal_entries
+  # POST /ledger_entries
   def create
-    @journal_entry = JournalEntry.new(journal_entry_params)
+    @ledger_entry = LedgerEntry.new(ledger_entry_params)
 
-    if @journal_entry.save
-      redirect_to @journal_entry, notice: 'Journal entry was successfully created.'
+    if @ledger_entry.save
+      redirect_to @ledger_entry, notice: 'Ledger entry was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /journal_entries/1
+  # PATCH/PUT /ledger_entries/1
   def update
-    if @journal_entry.update(journal_entry_params)
-      redirect_to @journal_entry, notice: 'Journal entry was successfully updated.'
+    if @ledger_entry.update(ledger_entry_params)
+      redirect_to @ledger_entry, notice: 'Ledger entry was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /journal_entries/1
+  # DELETE /ledger_entries/1
   def destroy
-    @journal_entry.destroy
-    redirect_to journal_entries_url, notice: 'Journal entry was successfully destroyed.'
+    @ledger_entry.destroy
+    redirect_to ledger_entries_url, notice: 'Ledger entry was successfully destroyed.'
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_journal_entry
-    @journal_entry = JournalEntry.find(params[:id])
+  def set_ledger_entry
+    @ledger_entry = LedgerEntry.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
-  def journal_entry_params
-    params.fetch(:journal_entry, {})
+  def ledger_entry_params
+    params.fetch(:ledger_entry, {})
   end
 
   include CompanyDependent
