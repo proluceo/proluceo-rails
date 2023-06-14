@@ -5,11 +5,11 @@
 
   <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
     <h1 class="heading-1">Accounts</h1>
-    <%= link_to 'New account', new_account_path, class: "btn-primary" %>
+    <%= link_to 'New account', new_account_path, data: { turbo_frame: "new_account_form" }, class: "btn-primary" %>
   </div>
 
   <div class="mt-8">
-    <%= form_tag accounts_path, method: :get, data: { turbo_frame: "seacrh_accounts", turbo_action: "advance", controller: "search", action: "input->search#submit" } do %>
+    <%= form_tag accounts_path, method: :get, data: { turbo_frame: "search_accounts", turbo_action: "advance", controller: "search", action: "input->search#submit" } do %>
       <div class="relative mt-2 rounded-md shadow-sm">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <%= heroicon "magnifying-glass", options: { class: "h-5 w-5 text-gray-400" } %>
@@ -23,7 +23,7 @@
     <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-        <div id="accounts" class="min-w-full">
+        <div class="min-w-full">
           <div class="table min-w-full bg-gray-50 text-sm font-semibold">
             <div>Company</div>
             <div>Number</div>
@@ -31,8 +31,11 @@
             <div><span class="sr-only">Edit</span></div>
           </div> 
          <div class="bg-white">
-            <%= turbo_frame_tag "seacrh_accounts" do %>
-              <%= render @accounts %>
+            <%= turbo_frame_tag "new_account_form" %>
+            <%= turbo_frame_tag "search_accounts" do %>
+              <div id="accounts">
+                <%= render @accounts %>
+              </div>
             <% end %>
           </div>
         </div>

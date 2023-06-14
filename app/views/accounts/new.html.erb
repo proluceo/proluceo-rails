@@ -1,9 +1,15 @@
-<%= render TurbomodalComponent.new(title: "New Account") do %>
-  <div class="mx-auto w-full">
-    <div class="pb-5 border-b border-gray-200">
-      <h1 class="font-bold text-4xl">New Account</h1>
-    </div>
+<% if @target %>
+  <%= render TurbomodalComponent.new(title: "New Account") do %>
+    <div class="mx-auto w-full">
+      <div class="pb-5 border-b border-gray-200">
+        <h1 class="font-bold text-4xl">New Account</h1>
+      </div>
 
-    <%= render "form", account: @account %>
-  </div>
+      <%= render "form", account: @account %>
+    </div>
+  <% end %>
+<% else %>
+  <%= turbo_frame_tag "new_account_form", class: "w-full" do %>
+    <%= render "new_form", account: @account %>
+  <% end %>
 <% end %>

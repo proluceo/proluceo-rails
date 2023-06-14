@@ -4,5 +4,12 @@
     <%= turbo_frame_tag account do %>
       <div><%= link_to account.label, edit_account_path(account), class: "hover:text-blue-600 hover:underline" %></div>
     <% end %>
-    <div class="hidden group-hover:flex justify-end items-center"><%= link_to 'Ledger', purchase_invoices_path(account_id: dom_id(account)), class: "text-blue-600 hover:text-blue-900 ml-2" %></div>
+    <div class="flex justify-end items-center">
+      <div class="hidden group-hover:flex justify-end items-center"><%= link_to 'Ledger', purchase_invoices_path(account_id: dom_id(account)), class: "text-blue-600 hover:text-blue-900 ml-2" %></div>
+      <div class="hidden group-hover:flex justify-end items-center">
+        <%= button_to account_path(account), form: { data: { turbo_confirm: "Are you sure you want to delete account #{account.label}?" } }, method: :delete, class: "inline-block ml-2" do %>
+          <%= heroicon "trash", options: { class: "h-4 w-4 text-gray-600 hover:text-gray-500 inline-block" } %>
+        <% end %>
+      </div>
+    </div>
   </div>

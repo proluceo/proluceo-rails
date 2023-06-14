@@ -25,14 +25,14 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     @target = params[:target]
 
-    if @account.save
-      respond_to do |format|
-        format.turbo_stream
-        format.html         { redirect_to @account, notice: "Account was successfully created." }
+    respond_to do |format|
+      if @account.save
+        format.turbo_stream { render turbo_stream: [turbo_stream.prepend("accounts", @account), turbo_stream.remove("form_account")] }
+        format.html { redirect_to @account, notice: "Account was succesfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
       end
-
-    else
-      render :new, status: :unprocessable_entity
     end
   end
 
@@ -48,7 +48,10 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   def destroy
     @account.destroy
-    redirect_to accounts_url, notice: "Account was successfully destroyed."
+
+    render turbo_stream: [
+      turbo_stream.remove(@account)
+    ]
   end
 
   private

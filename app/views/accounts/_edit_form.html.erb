@@ -1,9 +1,11 @@
-<%= form_with model: account, id: dom_id(account, "form"), class: "min-w-full flex" do |form| %>
-  <div>
+<%= form_with model: account, id: dom_id(account, "form"), class: "w-full flex justify-between" do |form| %>
+  <div class="w-full">
     <%= form.text_field :label, autofocus: true, class: "text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-1.5 w-full" %>
     <%= inline_error_for(:label, account) %>
   </div>
   <div class="inline">
-    <%= form.submit class: "btn-primary py-2 ml-2" %>
+    <%= form.button nil, class: "btn-primary py-2 ml-2" do %>
+      <%= heroicon "check", options: { class: "h-5 w-5 text-white" } %>
+    <% end %>
   </div>
 <% end %>
