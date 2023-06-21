@@ -6,7 +6,7 @@
 
 @layer components {
   .btn-primary {
-    @apply rounded-lg py-2.5 px-3.5 bg-blue-600 text-white font-medium hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
+    @apply rounded-lg py-2.5 px-3.5 bg-blue-600 text-white font-medium hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-not-allowed disabled:bg-blue-300;
   }
 
   .btn-white {
@@ -38,21 +38,36 @@
   }
 }
 
-.table {
+.account-table {
   display: grid;
   grid-template-columns: 0.8fr 0.8fr 8fr 1fr;
   column-gap: 2rem;
   align-items: bottom;
   padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #e5e7eb;
   border-bottom: none;
   border-collapse: collapse;
 }
 
-turbo-frame:last-child .table {
-  border-bottom: 1px solid #ccc;
+.ledger-entries-table {
+  display: grid;
+  grid-template-columns: 1fr 2fr 0.5fr 0.5fr 0.5fr;
+  column-gap: 2rem;
+  align-items: bottom;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-bottom: none;
+  border-collapse: collapse;
 }
 
-turbo-frame:nth-child(even) .table {
-  background: #fafafa;
+.account-line:last-child, .ledger-entry-line:last-child {
+  border-bottom: 1px solid #e5e7eb;
 }
+
+/* turbo-frame:last-child .account-table {
+  border-bottom: 1px solid #e5e7eb;
+} */
+
+/* turbo-frame:nth-child(even) .table {
+  background: #fafafa;
+} */

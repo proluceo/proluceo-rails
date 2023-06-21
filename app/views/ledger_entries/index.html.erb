@@ -4,12 +4,34 @@
   <% end %>
 
   <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Ledger entries</h1>
-    <%= link_to 'New journal entry', new_ledger_entry_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="heading-1">Ledger entries</h1>
+    <%= link_to 'New ledger entry', new_ledger_entry_path, data: { turbo_frame: "new_ledger_entry_form" }, class: "btn-primary" %>
   </div>
 
-  <div id="ledger_entries" class="min-w-full">
-    <%= render @ledger_entries %>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+        <div class="min-w-full">
+          <div class="ledger-entries-table min-w-full bg-gray-50 text-sm font-semibold">
+            <div>Date</div>
+            <div>Account</div>
+            <div class="flex justify-end items-center">Debit</div>
+            <div class="flex justify-end items-center">Credit</div>
+            <div></div>
+          </div> 
+         <div class="bg-white">
+            <div id="ledger_entry_form_block" class="bg-gray-50">
+              <%= turbo_frame_tag "new_ledger_entry_form" %>
+            </div>
+            <div id="ledger_entries">
+              <%= render @ledger_entries %>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
 

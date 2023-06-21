@@ -1,7 +1,7 @@
-<div id="<%= dom_id ledger_entry %>">
-  <% if action_name != "show" %>
-    <%= link_to "Show this journal entry", ledger_entry, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this journal entry', edit_ledger_entry_path(ledger_entry), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+<div id="<%= dom_id ledger_entry %>" class="ledger-entries-table ledger-entry-line min-w-full text-sm group hover:bg-gray-50">
+  <div class="flex justify-start items-center"><%= ledger_entry.position %></div>
+  <div class="flex justify-start items-center"><%= ledger_entry.account_number %><span class="ml-2"><%= ledger_entry.account.label %></span></div>
+  <div class="flex justify-end items-center font-medium"><%= ledger_entry.direction == "debit" ? number_with_precision(ledger_entry.amount, precision: 2) : "" %></div>
+  <div class="flex justify-end items-center font-medium"><%= ledger_entry.direction == "credit" ? number_with_precision(ledger_entry.amount, precision: 2) : "" %></div>
+  <div></div>
 </div>
