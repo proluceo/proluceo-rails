@@ -1,5 +1,4 @@
 <%= form_with model: account, id: dom_id(account, "form"), class: "account-table min-w-full" do |form| %>
-  <%= hidden_field_tag :target, @target %>
   <div></div>
   <div>
     <%= form.number_field :number, autofocus: true, class: "text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full" %>

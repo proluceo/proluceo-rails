@@ -26,9 +26,10 @@ class AccountsController < ApplicationController
     @target = params[:target]
 
     respond_to do |format|
-      if @account.save
+      if @account.save and @target.present?
+        format.turbo_stream
+      elsif @account.save
         format.turbo_stream { render turbo_stream: [turbo_stream.prepend("accounts", @account), turbo_stream.remove("form_account")] }
-        format.html { redirect_to @account, notice: "Account was succesfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @account.errors, status: :unprocessable_entity }

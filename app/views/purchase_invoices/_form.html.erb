@@ -14,35 +14,35 @@
   <div data-controller="purchase-invoice-form">
     <div class="my-6">
       <%= form.label :issued_on, class: "label" %>
-      <%= form.date_field :issued_on, autofocus: true, class: "input", data: { 'purchase-invoice-form-target' => 'issuedOn', action: 'purchase-invoice-form#focusOnSupplier' } %>
+      <%= form.date_field :issued_on, class: "input", data: { 'purchase-invoice-form-target' => 'issuedOn', action: 'purchase-invoice-form#focusOnSupplier' } %>
     </div>
 
     <div class="my-6 relative" data-controller="autocomplete" data-autocomplete-url-value="/suppliers/search" role="combobox">
       <%= form.label :supplier, class: "label" %>
-      <%= form.text_field :blub, class: "input", id: 'supplier', data: { 'autocomplete-target' => 'input' } %>
+      <%= form.text_field :supplier_input, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'supplier' } %>
       <%= form.hidden_field :supplier, data: { 'autocomplete-target' => 'hidden' } %>
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
     </div>
 
     <div class="my-6">
       <%= form.label :currency, class: "label" %>
-      <%= form.collection_select :currency, currencies, :to_s, :to_s, { prompt: true }, { id: 'currencies' , class: 'input w-1/3'}  %>
+      <%= form.collection_select :currency, currencies, :to_s, :to_s, { prompt: true }, { id: 'currencies' , class: 'input w-1/3', data: { 'purchase-invoice-form-target' => 'currency', action: 'purchase-invoice-form#focusOnAccount' }}  %>
     </div>
 
     <div class="my-6">
       <%= form.label :payment_account_id, class: "label" %>
-      <%= form.collection_select :payment_account_number, Account.companys, :number, :to_s, { prompt: true }, { id: 'accounts', class: 'input' }  %>
+      <%= form.collection_select :payment_account_number, Account.companys, :number, :to_s, { prompt: true }, { id: 'accounts', class: 'input', data: { 'purchase-invoice-form-target' => 'account', action: 'purchase-invoice-form#focusOnPaidOn' } }  %>
       <%= link_to "New account", new_account_path(target: 'accounts'), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
     </div>
 
     <div class="my-6">
       <%= form.label :paid_on, class: "label" %>
-      <%= form.date_field :paid_on, class: "input", id: "paidOn", data: { 'purchase-invoice-form-target' => 'paidOn', action: 'focus->purchase-invoice-form#prefillPaidOn keydown.tab->purchase-invoice-form#focusOnReference' } %>
+      <%= form.date_field :paid_on, class: "input", data: { 'purchase-invoice-form-target' => 'paidOn', action: 'focus->purchase-invoice-form#prefillPaidOn keydown.tab->purchase-invoice-form#focusOnReference' } %>
     </div>
 
     <div class="my-6">
       <%= form.label :reference, class: "label" %>
-      <%= form.text_field :reference, class: "input", id: "reference" %>
+      <%= form.text_field :reference, class: "input", data: { 'purchase-invoice-form-target' => 'reference' } %>
     </div>
 
     <%= form.hidden_field :document_id %>
