@@ -33,6 +33,10 @@
     @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-4 mt-2 w-full;
   }
 
+  .input-sm {
+    @apply text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2;
+  }
+
   ul li.list-group-item.active {
     @apply bg-blue-600 text-white;
   }
@@ -52,6 +56,17 @@
 .ledger-entries-table {
   display: grid;
   grid-template-columns: 1fr 2fr 0.5fr 0.5fr 0.5fr;
+  column-gap: 2rem;
+  align-items: bottom;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-bottom: none;
+  border-collapse: collapse;
+}
+
+.purchase-invoice-line-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
   column-gap: 2rem;
   align-items: bottom;
   padding: 1rem;

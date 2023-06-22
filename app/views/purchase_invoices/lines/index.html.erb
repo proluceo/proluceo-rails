@@ -1,18 +1,17 @@
 <%= turbo_frame_tag "purchase_invoice_body" do %>
   <%= turbo_frame_tag "errors" %>
   <div class="bg-white shadow overflow-hidden sm:rounded-md my-8">
-    <ul role="list" id="purchase_invoice_lines" class="divide-y divide-gray-200">
-      <li>
-        <div class="grid grid-cols-6 divide-x">
-          <p class="text-sm font-medium text-grey-900 truncate">Account</p>
-          <p class="text-sm font-medium text-grey-900 truncate">Amount</p>
-          <p class="text-sm font-medium text-grey-900 truncate">Tax Rate</p>
-          <p class="text-sm font-medium text-grey-900 truncate">Tax Account</p>
-          <p class="text-sm font-medium text-grey-900 truncate">After Tax</p>
-        </div>
-      </li>
+    <div id="purchase_invoice_lines">
+      <div class="purchase-invoice-line-table min-w-full bg-gray-50 text-sm font-semibold">
+        <div>Account</div>
+        <div>Amount</div>
+        <div>Tax Rate</div>
+        <div>Tax Account</div>
+        <div class="flex justify-end items-center">After Tax</div>
+        <div></div>
+      </div>
       <%= render(PurchaseInvoiceLineComponent.with_collection(@lines, editable: true)) %>
       <%= render(PurchaseInvoiceLineComponent.new(line: PurchaseInvoiceLine.new, editable: true)) %>
-    </ul>
+    </div>
   </div>
 <% end %>
