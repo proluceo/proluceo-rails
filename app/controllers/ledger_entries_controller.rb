@@ -30,7 +30,7 @@ class LedgerEntriesController < ApplicationController
       @parts << LedgerEntry.new
       respond_to do |format|
         format.turbo_stream { render turbo_stream: [
-          turbo_stream.replace("new_ledger_entry_form", partial: "ledger_entries/form", locals: { parts: @parts })
+          turbo_stream.update("new_ledger_entry_form", partial: "ledger_entries/form", locals: { parts: @parts })
         ]}
       end
       return
@@ -39,6 +39,7 @@ class LedgerEntriesController < ApplicationController
     # Set amount and position attributes based on credit and debit amount
     parts = []
     parts_attributes.each do |part|
+      part.delete(:account_input)
       if part[:credit_amount].present?
         part[:amount] = part[:credit_amount]
         part[:direction] = "credit"
@@ -88,7 +89,7 @@ class LedgerEntriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def ledger_entry_params
-    params.require(:ledger_entry).permit(parts: [:position, :account_number, :debit_amount, :credit_amount])
+    params.require(:ledger_entry).permit(parts: [:position, :account_input, :account_number, :debit_amount, :credit_amount])
     # params.fetch(:ledger_entry, {})
   end
 

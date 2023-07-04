@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
 
   resources :ledger_entries, nav: { icon: 'book-open' }
-  resources :accounts, nav: { icon: 'folder-open' }
+  resources :accounts, nav: { icon: 'folder-open' } do
+    get :search, on: :collection
+  end
   resources :companies, nav: { icon: 'building-office-2' } do
     get :select, on: :member
   end
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   get '/suppliers/search', to: 'suppliers#search'
+  get '/currencies/search', to: 'currencies#search'
 
   # Defines the root path route ("/")
   root "companies#index"

@@ -6,6 +6,11 @@ class AccountsController < ApplicationController
     @accounts = Account.search(params).companys
   end
 
+  def search
+    @accounts = Account.search(params).companys
+    render layout: false
+  end
+
   # GET /accounts/1
   def show
   end

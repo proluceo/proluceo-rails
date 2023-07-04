@@ -1,3 +1,4 @@
 <%= turbo_stream.update @target do %>
-  <%= options_from_collection_for_select(Account.companys, :number, :to_s, @account.number) %>
+  <%# <%= options_from_collection_for_select(Account.companys, :number, :to_s, @account.number) %>
+  <%= form.text_field :payment_account_input, class: "input", id: "account_input", value: @account.number, data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'account' } %>
 <% end %>

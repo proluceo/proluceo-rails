@@ -15,7 +15,13 @@ export default class extends Controller {
 
     // Event fired by stimulus-autocomplete: https://github.com/afcapel/stimulus-autocomplete
     document.addEventListener("autocomplete.change", (event) => {
-      this.currencyTarget.focus();
+      if (event.target.id === "supplier") {
+        this.currencyTarget.focus();
+      } else if (event.target.id === "currency") {
+        this.accountTarget.focus();
+      } else if (event.target.id === "payment_account") {
+        this.paidOnTarget.focus();
+      }
     });
 
     // Event fired when creating a new account
@@ -29,15 +35,6 @@ export default class extends Controller {
     if (issuedOn.length === 10 && issuedOn.startsWith("2")) {
       this.supplierTarget.focus();
     }
-  }
-
-  focusOnAccount() {
-    this.accountTarget.focus();
-  }
-
-  focusOnPaidOn() {
-    console.log("Focus on paidOn");
-    this.paidOnTarget.focus();
   }
 
   prefillPaidOn() {
