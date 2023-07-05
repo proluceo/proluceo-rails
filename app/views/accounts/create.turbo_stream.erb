@@ -1,4 +1,6 @@
-<%= turbo_stream.update @target do %>
-  <%# <%= options_from_collection_for_select(Account.companys, :number, :to_s, @account.number) %>
-  <%= form.text_field :payment_account_input, class: "input", id: "account_input", value: @account.number, data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'account' } %>
+<%= turbo_stream.replace @target do %>
+  <div id=<%= @target %>>
+    <%= text_field_tag "#{@model}[#{@target}_input]", "#{@account.number} #{@account.label}", class: "input", data: { 'autocomplete-target' => 'input' } %>
+    <%= hidden_field_tag "#{@model}[#{@target}_number]", @account.number, data: { 'autocomplete-target' => 'hidden' } %>
+  </div>
 <% end %>

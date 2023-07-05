@@ -21,7 +21,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # POST /purchase_invoices
   def create
-    @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params)
+    @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params.except(:supplier_input, :currency_input, :payment_account_input))
 
     if @purchase_invoice.save
       if @purchase_invoice.document_id and Document.unprocessed.any?
@@ -59,7 +59,7 @@ class PurchaseInvoicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_invoice_params
-      params.require(:purchase_invoice).permit(:issued_on, :supplier, :reference, :payment_account_number, :paid_on, :document_id, :currency)
+      params.require(:purchase_invoice).permit(:issued_on, :supplier, :reference, :payment_account_number, :paid_on, :document_id, :currency, :supplier_input, :currency_input, :payment_account_input)
     end
   include CompanyDependent
 end

@@ -31,13 +31,14 @@
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
     </div>
 
-    <div class="my-6 relative" id="payment_account" data-controller="autocomplete" data-autocomplete-url-value="/accounts/search" role="combobox">
+    <div class="my-6 relative" id="account" data-controller="autocomplete" data-autocomplete-url-value="/accounts/search" role="combobox">
       <%= form.label :payment_account_id, class: "label" %>
-      <%= form.text_field :payment_account_input, class: "input", id: "account_input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'account' } %>
-      <%= form.hidden_field :payment_account_number, data: { 'autocomplete-target' => 'hidden' } %>
+      <div id="payment_account">
+        <%= form.text_field :payment_account_input, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'account' } %>
+        <%= form.hidden_field :payment_account_number, data: { 'autocomplete-target' => 'hidden' } %>
+      </div>
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
-      <%# <%= form.collection_select :payment_account_number, Account.companys, :number, :to_s, { prompt: true }, { id: 'accounts', class: 'input', data: { 'purchase-invoice-form-target' => 'account', action: 'purchase-invoice-form#focusOnPaidOn' } }  %>
-      <%= link_to "New account", new_account_path(target: 'account_input'), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
+      <%= link_to "New account", new_account_path(target: 'payment_account', model: 'purchase_invoice'), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
     </div>
 
     <div class="my-6">
