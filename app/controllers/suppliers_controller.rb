@@ -3,4 +3,5 @@ class SuppliersController < ApplicationController
     @suppliers = Supplier.search(params).companys
     render layout: false
   end
+  include CompanyDependent
 end
