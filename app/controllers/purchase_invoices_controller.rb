@@ -3,7 +3,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # GET /purchase_invoices
   def index
-    @purchase_invoices = PurchaseInvoice.search(params).select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier_name, :reference, :amount, :paid_on)
+    @purchase_invoices = PurchaseInvoice.search(params).select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier_name, :reference, :paid_on)
   end
 
   # GET /purchase_invoices/1
@@ -12,7 +12,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # GET /purchase_invoices/new
   def new
-    @purchase_invoice = PurchaseInvoice.new(document_id: params[:document_id])
+    @purchase_invoice = PurchaseInvoice.new_with_last_invoice_defaults(document_id: params[:document_id])
   end
 
   # GET /purchase_invoices/1/edit
@@ -21,7 +21,8 @@ class PurchaseInvoicesController < ApplicationController
 
   # POST /purchase_invoices
   def create
-    @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params.except(:supplier_input, :currency_input, :payment_account_input))
+    Rails.logger.info(purchase_invoice_params)
+    @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params)
 
     if @purchase_invoice.save
       if @purchase_invoice.document_id and Document.unprocessed.any?
@@ -54,12 +55,12 @@ class PurchaseInvoicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_invoice
-      @purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :document_id, :payment_account_number, :issued_on, :supplier_name, :reference, :amount, :paid_on).find(params[:id])
+      @purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :document_id, :payment_account_number, :issued_on, :supplier_name, :reference, :paid_on).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def purchase_invoice_params
-      params.require(:purchase_invoice).permit(:issued_on, :supplier_name, :reference, :payment_account_number, :paid_on, :document_id, :currency, :supplier_input, :currency_input, :payment_account_input)
+      filtered_params = params.require(:purchase_invoice).permit(:issued_on, :supplier_name, :reference, :payment_account_number, :paid_on, :document_id, :currency, lines_attributes: [:account_number, :amount, :tax_rate, :tax_account_number])
     end
   include CompanyDependent
 end

@@ -2,7 +2,7 @@
   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= purchase_invoice.issued_on %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= purchase_invoice.supplier_name %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= purchase_invoice.reference %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right"><%= purchase_invoice.amount %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right"> - </td>
   <% if current_page?(purchase_invoices_path) %>
     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
       <%= link_to "Edit", edit_purchase_invoice_path(purchase_invoice), data: { turbo_frame: "_top" }, class: "text-blue-600 hover:text-blue-900" %>

@@ -37,3 +37,6 @@ application.register("dropzone", DropzoneController);
 
 import { Autocomplete } from "stimulus-autocomplete";
 application.register("autocomplete", Autocomplete);
+
+import NestedForm from 'stimulus-rails-nested-form';
+application.register('nested-form', NestedForm);

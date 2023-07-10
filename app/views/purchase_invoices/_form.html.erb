@@ -1,4 +1,4 @@
-<%= form_with(model: purchase_invoice, class: "contents") do |form| %>
+<%= form_with(model: purchase_invoice, class: "contents", data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }) do |form| %>
   <% if purchase_invoice.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(purchase_invoice.errors.count, "error") %> prohibited this purchase_invoice from being saved:</h2>
@@ -19,23 +19,20 @@
 
     <div class="my-6 relative" id="supplier" data-controller="autocomplete" data-autocomplete-url-value="/suppliers/search" role="combobox">
       <%= form.label :supplier, class: "label" %>
-      <%= form.text_field :supplier_input, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'supplier' } %>
-      <%= form.hidden_field :supplier_name, data: { 'autocomplete-target' => 'hidden' } %>
+      <%= form.text_field :supplier_name, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'supplier' } %>
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
     </div>
 
     <div class="my-6 w-1/3 relative" id="currency" data-controller="autocomplete" data-autocomplete-url-value="/currencies/search" role="combobox">
       <%= form.label :currency, class: "label" %>
-      <%= form.text_field :currency_input, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'currency' } %>
-      <%= form.hidden_field :currency, data: { 'autocomplete-target' => 'hidden' } %>
+      <%= form.text_field :currency, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'currency' } %>
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
     </div>
 
     <div class="my-6 relative" id="account" data-controller="autocomplete" data-autocomplete-url-value="/accounts/search" role="combobox">
       <%= form.label :payment_account_id, class: "label" %>
       <div id="payment_account">
-        <%= form.text_field :payment_account_input, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'account' } %>
-        <%= form.hidden_field :payment_account_number, data: { 'autocomplete-target' => 'hidden' } %>
+        <%= form.text_field :payment_account_number, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'account' } %>
       </div>
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
       <%= link_to "New account", new_account_path(target: 'payment_account', model: 'purchase_invoice'), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
@@ -50,6 +47,26 @@
       <%= form.label :reference, class: "label" %>
       <%= form.text_field :reference, class: "input", data: { 'purchase-invoice-form-target' => 'reference' } %>
     </div>
+
+    <!-- Nested lines form -->
+    <!-- Template for new line -->
+    <template data-nested-form-target="template">
+      <%= form.fields_for :lines, PurchaseInvoiceLine.new, child_index: 'NEW_RECORD' do |line_fields| %>
+        <%= render "line_form", form: line_fields %>
+      <% end %>
+    </template>
+
+    <!-- Existing lines -->
+    <%= form.fields_for :lines do |line_fields| %>
+      <%= render "line_form", form: line_fields %>
+    <% end %>
+
+    <button type="button" data-action="nested-form#add">Add Line</button>
+
+    <!-- Target for new line insertion -->
+    <div data-nested-form-target="target"></div>
+
+
 
     <%= form.hidden_field :document_id %>
 
