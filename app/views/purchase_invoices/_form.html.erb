@@ -20,7 +20,7 @@
     <div class="my-6 relative" id="supplier" data-controller="autocomplete" data-autocomplete-url-value="/suppliers/search" role="combobox">
       <%= form.label :supplier, class: "label" %>
       <%= form.text_field :supplier_input, class: "input", data: { 'autocomplete-target' => 'input', 'purchase-invoice-form-target' => 'supplier' } %>
-      <%= form.hidden_field :supplier, data: { 'autocomplete-target' => 'hidden' } %>
+      <%= form.hidden_field :supplier_name, data: { 'autocomplete-target' => 'hidden' } %>
       <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
     </div>
 

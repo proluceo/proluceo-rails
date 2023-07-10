@@ -9,7 +9,7 @@ class PurchaseInvoice < ApplicationRecord
 
   def self.search(params)
     params[:query].blank? ? all : where(
-      "cast(issued_on as text) ILIKE ? OR supplier ILIKE ? OR reference ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%" 
+      "cast(issued_on as text) ILIKE ? OR supplier_name ILIKE ? OR reference ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"
     )
   end
 end

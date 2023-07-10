@@ -3,7 +3,7 @@ class PurchaseInvoicesController < ApplicationController
 
   # GET /purchase_invoices
   def index
-    @purchase_invoices = PurchaseInvoice.search(params).select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier, :reference, :amount, :paid_on)
+    @purchase_invoices = PurchaseInvoice.search(params).select(:purchase_invoice_id, :company_id, :payment_account_number, :document_id, :issued_on, :supplier_name, :reference, :amount, :paid_on)
   end
 
   # GET /purchase_invoices/1
@@ -54,12 +54,12 @@ class PurchaseInvoicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_invoice
-      @purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :document_id, :payment_account_number, :issued_on, :supplier, :reference, :amount, :paid_on).find(params[:id])
+      @purchase_invoice = PurchaseInvoice.select(:purchase_invoice_id, :company_id, :document_id, :payment_account_number, :issued_on, :supplier_name, :reference, :amount, :paid_on).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def purchase_invoice_params
-      params.require(:purchase_invoice).permit(:issued_on, :supplier, :reference, :payment_account_number, :paid_on, :document_id, :currency, :supplier_input, :currency_input, :payment_account_input)
+      params.require(:purchase_invoice).permit(:issued_on, :supplier_name, :reference, :payment_account_number, :paid_on, :document_id, :currency, :supplier_input, :currency_input, :payment_account_input)
     end
   include CompanyDependent
 end

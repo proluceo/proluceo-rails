@@ -1,8 +1,6 @@
 class SuppliersController < ApplicationController
-  SUPPLIERS = ['bidule', 'bidons', 'machin', 'marmite', 'truc', 'tralala']
-
   def search
-    @suppliers = SUPPLIERS.select{|s| s.include?("#{params[:q]}")}
+    @suppliers = Supplier.search(params).companys
     render layout: false
   end
 end
