@@ -21,7 +21,6 @@ class PurchaseInvoicesController < ApplicationController
 
   # POST /purchase_invoices
   def create
-    Rails.logger.info(purchase_invoice_params)
     @purchase_invoice = PurchaseInvoice.new(purchase_invoice_params)
 
     if @purchase_invoice.save

@@ -8,7 +8,13 @@ class ApplicationRecord < ActiveRecord::Base
   before_validation :set_company_id
 
 
+  # FSM events  should never be accessed outside of postgres
+  self.ignored_columns += [:fsm_events]
+  # Current state of FSM is read only
+  attr_readonly :fsm_current_state
 
+
+  # Set company_id property to current company_id
   def self.current_company_id=(current_company_id)
     @@current_company_id = current_company_id
   end
