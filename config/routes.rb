@@ -22,7 +22,10 @@ Rails.application.routes.draw do
     get :attachment, on: :member
   end
 
-  get '/suppliers/search', to: 'suppliers#search'
+  resources :suppliers, only: [:index, :new, :create] do
+    get :search, on: :collection
+  end
+
   get '/currencies/search', to: 'currencies#search'
 
   # Defines the root path route ("/")

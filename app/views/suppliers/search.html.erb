@@ -1,5 +1,5 @@
 <% @suppliers.each do |supplier| %>
-  <li class="list-group-item relative cursor-default py-2 pl-3 text-gray-900 hover:bg-blue-600 hover:text-white active:bg-blue-600 active:text-white" role="option" data-autocomplete-value="<%= supplier %>" data-autocomplete-label="<%= supplier %>">
+  <li class="list-group-item relative cursor-default py-2 pl-3 text-gray-900 hover:bg-blue-600 hover:text-white active:bg-blue-600 active:text-white" role="option" data-autocomplete-value="<%= supplier %>" data-autocomplete-label="<%= supplier.invoices_in %>">
     <%= supplier %>
   </li>
 <% end %>

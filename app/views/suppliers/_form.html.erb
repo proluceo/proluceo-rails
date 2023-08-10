@@ -1,0 +1,30 @@
+<%= form_with(model: supplier, class: "contents") do |form| %>
+  <%= hidden_field_tag :target, @target %>
+  <%= hidden_field_tag :model, @model %>
+  <% if supplier.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+
+      <ul>
+        <% supplier.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name, class: "label" %>
+    <%= form.text_field :name, class: "input" %>
+  </div>
+
+  <div class="my-5 relative" id="currency" data-controller="autocomplete" data-autocomplete-url-value="/currencies/search" role="combobox">
+    <%= form.label :invoices_in, class: "label" %>
+    <%= form.text_field :invoices_in, class: "input", data: { 'autocomplete-target' => 'input' } %>
+    <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
+  </div>
+
+  <div class="border-t border-gray-200">
+    <%= form.submit class: "btn-primary mt-5 w-full" %>
+  </div>
+<% end %>
