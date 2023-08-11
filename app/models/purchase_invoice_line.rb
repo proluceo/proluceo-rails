@@ -1,6 +1,6 @@
 class PurchaseInvoiceLine < ApplicationRecord
   self.primary_keys = [:purchase_invoice_id, :account_number]
-
+  self.schema = :accounting
   belongs_to :purchase_invoice, optional: true
   belongs_to :company
   belongs_to :account, foreign_key: [:company_id, :account_number]

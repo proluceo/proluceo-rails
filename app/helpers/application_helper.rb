@@ -19,4 +19,12 @@ module ApplicationHelper
     end
     html.join.html_safe
   end
+
+  def current_user
+    session[:current_user]
+  end
+
+  def signedin?
+    !!current_user
+  end
 end

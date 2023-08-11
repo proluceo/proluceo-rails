@@ -1,0 +1,40 @@
+<%= form_with(model: market_member, class: "contents", data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }) do |form| %>
+  <% if market_member.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(market_member.errors.count, "error") %> prohibited this market_member from being saved:</h2>
+
+      <ul>
+        <% market_member.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name, class: "label" %>
+    <%= form.text_field :name, class: "input sm:w-1/2" %>
+  </div>
+
+  <!-- Nested contacts form -->
+    <!-- Template for new contact -->
+    <template data-nested-form-target="template">
+      <%= form.fields_for :contacts, Contact.new, child_index: 'NEW_RECORD' do |contact_fields| %>
+        <%= render "contact_form", form: contact_fields %>
+      <% end %>
+    </template>
+
+    <!-- Existing contact -->
+    <%= form.fields_for :contacts do |contact_fields| %>
+      <%= render "contact_form", form: contact_fields %>
+    <% end %>
+
+    <button type="button" data-action="nested-form#add">Add Contact</button>
+
+    <!-- Target for new line insertion -->
+    <div data-nested-form-target="target"></div>
+
+  <div class="border-t border-gray-200">
+    <%= form.submit class: "btn-primary mt-5" %>
+  </div>
+<% end %>

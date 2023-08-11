@@ -30,10 +30,16 @@
         <a href="#" class="flex-shrink-0 w-full group block">
           <div class="flex items-center">
             <div>
-              <img class="inline-block h-9 w-9 rounded-full" src="https://sites.google.com/site/webtoolsbox/_/rsrc/1472869091786/avatars/monsters/Grabbabeast2.jpg?height=256&width=256" alt="">
+              <% if current_user.image %>
+                <%= image_tag current_user.image, class: "inline-block h-9 w-9 rounded-full", alt:"Signed in user avatar" %>
+              <% else %>
+                <svg class="inline-block h-9 w-9 rounded-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              <% end %>
             </div>
             <div class="ml-3">
-              <p class="text-sm font-medium text-white">User</p>
+              <p class="text-sm font-medium text-white"><%= current_user.first_name %></p>
               <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200"><%= current_company.name %></p>
             </div>
           </div>

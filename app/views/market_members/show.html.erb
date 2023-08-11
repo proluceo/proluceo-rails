@@ -1,0 +1,18 @@
+<div class="mx-auto w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
+    <h1 class="font-bold text-4xl"><%= @market_member.name %></h1>
+    <div class="mt-3 flex sm:mt-0 sm:ml-4">
+      <%= link_to 'Edit this Market Member', edit_market_member_path(@market_member), class: "ml-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
+      <%= link_to 'Back to Market Members', market_members_path, class: "ml-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
+    </div>
+  </div>
+
+  <%= render @market_member %>
+
+  <%= button_to 'Destroy this Market Member', market_member_path(@market_member), method: :delete, class: "mt-8 rounded-lg py-3 px-5 bg-red-600 text-white inline-block font-medium cursor-pointer" %>
+</div>
+

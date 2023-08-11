@@ -6,12 +6,14 @@ ruby "3.2.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
-
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+
+# Use nulldb adapter before authentication
+gem "activerecord-nulldb-adapter"
 
 # Composite PK support
 gem 'composite_primary_keys', '~> 14.0'
@@ -64,6 +66,15 @@ gem "bootsnap", require: false
 # Gem to add resources to an array, for auto nav population
 gem 'resources_nav', github: 'brunoenten/resources_nav', branch: 'main'
 
+# Authentification. Users are managed by Postgres
+gem 'omniauth', github: 'omniauth/omniauth', branch: 'master', tag: 'v2.1.1'
+gem "omniauth-rails_csrf_protection"
+# Omniauth strategies
+gem 'omniauth-google-oauth2'
+
+# Strip white spaces before saving model
+gem "strip_attributes"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -78,6 +89,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # Populate env variables from file
+  gem 'dotenv-rails'
+
 
   gem "erb-formatter"
   gem "solargraph"
