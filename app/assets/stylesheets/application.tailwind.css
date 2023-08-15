@@ -13,6 +13,10 @@
     @apply rounded-lg py-2.5 px-3.5 bg-white text-gray-900 shadow-sm font-medium ring-1 ring-inset ring-gray-300 hover:bg-gray-50
   }
 
+  .btn-small {
+    @apply py-1.5 px-2.5;
+  }
+
   .link {
     @apply text-blue-700 hover:text-blue-800 hover:underline;
   }
@@ -22,7 +26,7 @@
   }
 
   .label {
-    @apply block font-medium leading-6 text-gray-900;
+    @apply block font-medium text-sm leading-6 text-gray-900;
   }
 
   .input {

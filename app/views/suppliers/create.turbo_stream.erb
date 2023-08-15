@@ -1,0 +1,6 @@
+<%= turbo_stream.replace @target do %>
+  <div id=<%= @target %>>
+    <%= text_field_tag "#{@model}[#{@target}_input]", "#{@supplier.name}", class: "input", data: { 'autocomplete-target' => 'input' } %>
+    <%= hidden_field_tag "#{@model}[#{@target}_name]", @supplier.name, data: { 'autocomplete-target' => 'hidden' } %>
+  </div>
+<% end %>
