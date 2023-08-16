@@ -72,4 +72,5 @@ Rails.application.configure do
 
   # Allow tailscale funnel
   config.hosts << "aero14be-wsl.kiko-agama.ts.net"
+  config.hosts << "macbook-pro-de-maxime.tail87b7f.ts.net"
 end

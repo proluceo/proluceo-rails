@@ -23,7 +23,7 @@ development:
   <<: *default
   username: authenticator
   password: yomama
-  port: 5433
+  port: 5432
 
 debug:
   <<: *default
