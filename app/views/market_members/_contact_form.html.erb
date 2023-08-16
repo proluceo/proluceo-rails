@@ -1,4 +1,4 @@
-<div class="nested-form-wrapper" data-new-record="<%= form.object.new_record? %>">
+<div class="nested-form-wrapper grid grid-cols-4 gap-x-4" data-new-record="<%= form.object.new_record? %>">
     <div class="my-6">
       <%= form.label :first_name, class: "label" %>
       <%= form.text_field :first_name, class: "input" %>
@@ -14,11 +14,14 @@
       <%= form.text_field :work_email, class: "input" %>
     </div>
 
-    <div class="my-6">
-      <%= form.label :phone, class: "label" %>
-      <%= form.text_field :phone, class: "input" %>
+    <div class="my-6 flex justify-start items-end">
+      <div class="w-full">
+        <%= form.label :phone, class: "label" %>
+        <%= form.text_field :phone, class: "input" %>
+      </div>
+      <button type="button" data-action="nested-form#remove" class="btn-danger inline-flex items-center ml-4">
+        <%= heroicon "trash", options: { class: "h-5 w-5" } %>
+      </button>
     </div>
 
-
-  <button type="button" data-action="nested-form#remove">Remove line</button>
 </div>

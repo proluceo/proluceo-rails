@@ -11,12 +11,14 @@
     </div>
   <% end %>
 
-  <div class="my-5">
+  <div class="my-6">
     <%= form.label :name, class: "label" %>
-    <%= form.text_field :name, class: "input sm:w-1/2" %>
+    <%= form.text_field :name, class: "input sm:w-1/4", autofocus: true %>
   </div>
 
   <!-- Nested contacts form -->
+  <div class="bg-white rounded-md shadow-sm p-6 mt-8">
+    <h2 class="text-lg font-medium text-gray-900 pb-2 border-b border-gray-200">Contact information</h2>
     <!-- Template for new contact -->
     <template data-nested-form-target="template">
       <%= form.fields_for :contacts, Contact.new, child_index: 'NEW_RECORD' do |contact_fields| %>
@@ -29,12 +31,16 @@
       <%= render "contact_form", form: contact_fields %>
     <% end %>
 
-    <button type="button" data-action="nested-form#add">Add Contact</button>
-
     <!-- Target for new line insertion -->
     <div data-nested-form-target="target"></div>
 
-  <div class="border-t border-gray-200">
-    <%= form.submit class: "btn-primary mt-5" %>
+    <button type="button" data-action="nested-form#add" class="btn-primary btn-small inline-flex items-center mt-4">
+      <%= heroicon "user-plus", options: { class: "h-5 w-5" } %>
+      <span class="ml-2">Add Contact</span>
+    </button>
+  </div>
+
+  <div class="mt-12">
+    <%= form.submit class: "btn-primary" %>
   </div>
 <% end %>
