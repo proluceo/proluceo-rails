@@ -1,27 +1,26 @@
-<div class="nested-form-wrapper grid grid-cols-4 gap-x-4" data-new-record="<%= form.object.new_record? %>">
-    <div class="my-6">
-      <%= form.label :first_name, class: "label" %>
-      <%= form.text_field :first_name, class: "input" %>
-    </div>
+<div class="nested-form-wrapper grid grid-cols-4 gap-x-4 mt-6" data-new-record="<%= form.object.new_record? %>">
+  <div>
+    <%= form.label :first_name, class: "label" %>
+    <%= form.text_field :first_name, class: "input", data: { 'nested-form-target' => 'contactFirstName'} %>
+  </div>
 
-    <div class="my-6">
-      <%= form.label :last_name, class: "label" %>
-      <%= form.text_field :last_name, class: "input" %>
-    </div>
+  <div>
+    <%= form.label :last_name, class: "label" %>
+    <%= form.text_field :last_name, class: "input" %>
+  </div>
 
-    <div class="my-6">
-      <%= form.label :work_email, class: "label" %>
-      <%= form.text_field :work_email, class: "input" %>
-    </div>
+  <div>
+    <%= form.label :work_email, class: "label" %>
+    <%= form.text_field :work_email, class: "input" %>
+  </div>
 
-    <div class="my-6 flex justify-start items-end">
-      <div class="w-full">
-        <%= form.label :phone, class: "label" %>
-        <%= form.text_field :phone, class: "input" %>
-      </div>
-      <button type="button" data-action="nested-form#remove" class="btn-danger inline-flex items-center ml-4">
-        <%= heroicon "trash", options: { class: "h-5 w-5" } %>
-      </button>
+  <div class="flex justify-start items-end">
+    <div class="w-full">
+      <%= form.label :phone, class: "label" %>
+      <%= form.text_field :phone, class: "input" %>
     </div>
-
+    <button type="button" data-action="nested-form#remove" class="btn-danger inline-flex items-center ml-4">
+      <%= heroicon "trash", options: { class: "h-5 w-5" } %>
+    </button>
+  </div>
 </div>

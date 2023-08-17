@@ -34,13 +34,13 @@
     <!-- Target for new line insertion -->
     <div data-nested-form-target="target"></div>
 
-    <button type="button" data-action="nested-form#add" class="btn-primary btn-small inline-flex items-center mt-4">
-      <%= heroicon "user-plus", options: { class: "h-5 w-5" } %>
-      <span class="ml-2">Add Contact</span>
+    <button type="button" data-action="nested-form#add" class="link inline-flex items-center mt-6 text-sm font-semibold leading-6">
+      <%= heroicon "user-plus", options: { class: "h-4 w-4" } %>
+      <span class="ml-1">Add another contact</span>
     </button>
   </div>
 
-  <div class="mt-12">
+  <div class="mt-8">
     <%= form.submit class: "btn-primary" %>
   </div>
 <% end %>
