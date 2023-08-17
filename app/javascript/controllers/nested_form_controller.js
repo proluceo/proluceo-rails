@@ -1,7 +1,7 @@
 import NestedForm from "stimulus-rails-nested-form";
 
 export default class extends NestedForm {
-  static targets = [...super.targets, "contactFirstName"];
+  static targets = [...super.targets, "firstNestedInput"];
 
   connect() {
     super.connect();
@@ -9,7 +9,7 @@ export default class extends NestedForm {
 
   add(t) {
     super.add(t);
-    const lastFirstNameInput = this.contactFirstNameTargets.pop();
-    lastFirstNameInput.focus();
+    const lastLineFirstInput = this.firstNestedInputTargets.pop();
+    lastLineFirstInput.focus();
   }
 }
