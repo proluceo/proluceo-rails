@@ -11,7 +11,34 @@
     </div>
   </div>
 
-  <%= render @market_member %>
+  <h2 class="heading-2 mt-6">Contact list</h2>
+  <% Contact.where(company_id: @market_member.company_id, market_member_name: @market_member.name).each do |contact| %>
+    <div class="rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-md sm:my-6 sm:w-full sm:max-w-sm sm:p-6">
+      <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title"><%= contact.full_name %></h3>
+      <ul class="text-sm text-gray-600 mt-2">
+        <% if contact.phone %>
+          <li class="flex items-center">
+            <%= heroicon "phone", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
+            <%= contact.phone %>
+          </li>
+        <% end %>
+        <li class="flex items-center">
+          <%= heroicon "envelope", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
+          <%= contact.work_email %>
+        </li>
+      </ul>
+      <div class="mt-2 sm:mt-4 sm:grid sm:grid-cols-2">
+        <button type="button" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          <%= heroicon "phone", options: { class: "-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" } %>
+          <span>Phone</span>
+        </button>
+        <button type="button" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+            <%= heroicon "envelope", options: { class: "-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" } %>
+          <span>Email</span>
+        </button>
+      </div>
+    </div>
+  <% end %>
 
   <%= button_to 'Destroy this Market Member', market_member_path(@market_member), method: :delete, class: "mt-8 rounded-lg py-3 px-5 bg-red-600 text-white inline-block font-medium cursor-pointer" %>
 </div>

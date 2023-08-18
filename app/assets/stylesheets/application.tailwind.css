@@ -29,6 +29,10 @@
     @apply font-bold text-4xl text-gray-900;
   }
 
+  .heading-2 {
+    @apply font-semibold text-2xl text-gray-800;
+  }
+
   .label {
     @apply block font-medium text-sm leading-6 text-gray-900;
   }
