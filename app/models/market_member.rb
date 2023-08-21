@@ -3,7 +3,7 @@ class MarketMember < ApplicationRecord
     self.schema = :sales
     belongs_to :company
     has_many :contacts, foreign_key: [:company_id, :market_member_name]
-    has_many :exchanges
+    has_many :exchanges, foreign_key: [:company_id, :market_member_name]
 
     accepts_nested_attributes_for :contacts
     accepts_nested_attributes_for :exchanges
