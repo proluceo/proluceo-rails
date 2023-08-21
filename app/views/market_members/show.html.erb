@@ -6,40 +6,78 @@
   <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
     <h1 class="font-bold text-4xl"><%= @market_member.name %></h1>
     <div class="mt-3 flex sm:mt-0 sm:ml-4">
-      <%= link_to 'Edit this Market Member', edit_market_member_path(@market_member), class: "ml-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
+      <%= link_to 'Edit', edit_market_member_path(@market_member), class: "ml-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
       <%= link_to 'Back to Market Members', market_members_path, class: "ml-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
     </div>
   </div>
 
-  <h2 class="heading-2 mt-6">Contact list</h2>
-  <% Contact.where(company_id: @market_member.company_id, market_member_name: @market_member.name).each do |contact| %>
-    <div class="rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-md sm:my-6 sm:w-full sm:max-w-sm sm:p-6">
-      <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title"><%= contact.full_name %></h3>
-      <ul class="text-sm text-gray-600 mt-2">
-        <% if contact.phone %>
-          <li class="flex items-center">
-            <%= heroicon "phone", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
-            <%= contact.phone %>
-          </li>
-        <% end %>
-        <li class="flex items-center">
-          <%= heroicon "envelope", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
-          <%= contact.work_email %>
-        </li>
-      </ul>
-      <div class="mt-2 sm:mt-4 sm:grid sm:grid-cols-2">
-        <button type="button" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          <%= heroicon "phone", options: { class: "-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" } %>
-          <span>Phone</span>
-        </button>
-        <button type="button" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            <%= heroicon "envelope", options: { class: "-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" } %>
-          <span>Email</span>
-        </button>
-      </div>
+  <div class="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+    <div class="lg:col-start-4 lg:row-end-1">
+      <h2 class="heading-2 mt-6">Contact list</h2>
+      <% @market_member.contacts.each do |contact| %>
+        <div class="rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-md sm:my-6 sm:w-full sm:p-6">
+          <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title"><%= contact.full_name %></h3>
+          <ul class="text-sm text-gray-600 mt-2">
+            <% if contact.phone %>
+              <li class="flex items-center">
+                <%= heroicon "phone", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
+                <%= contact.phone %>
+              </li>
+            <% end %>
+            <li class="flex items-center">
+              <%= heroicon "envelope", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
+              <%= contact.work_email %>
+            </li>
+          </ul>
+          <div class="mt-2 sm:mt-4 sm:grid sm:grid-cols-2">
+            <a href="mailto:<%= contact.work_email %>" type="button" class="relative inline-flex justify-center items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+              <%= heroicon "envelope", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
+              <span>Email</span>
+            </a>
+            <% if contact.phone %>
+              <a href="tel:<%= contact.phone %>" type="button" class="relative ml-3 inline-flex justify-center items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                <%= heroicon "phone", options: { class: "-ml-0.5 mr-1.5 h-4 w-4 text-gray-400" } %>
+                <span>Phone</span>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
 
-  <%= button_to 'Destroy this Market Member', market_member_path(@market_member), method: :delete, class: "mt-8 rounded-lg py-3 px-5 bg-red-600 text-white inline-block font-medium cursor-pointer" %>
+    <div class="lg:col-span-3 lg:row-span-2 lg:row-end-2">
+      <h2 class="heading-2 mt-6">Exchanges</h2>
+      <% @market_member.exchanges.by_recently_created.each do |exchange| %>
+        <div class="rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-md sm:my-6 sm:p-6">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full <%= exchange.mean_icon[:color] %> sm:mx-0 sm:h-8 sm:w-8">
+              <%= heroicon exchange.mean_icon[:name], options: { class: "h-4 w-4 text-white" } %>
+            </div>
+            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <div class="flex justify-between items-center">
+                <p class="text-sm text-gray-500"><span class="bg-gray-100 p-1 rounded-sm"><%= Person.find(exchange.sender_id).full_name %></span> to <%= Person.where(person_id: exchange.recipients_id).map(&:full_name).join(",") %></p>
+                <p class="text-sm text-gray-500 flex items-center">
+                  <%= heroicon 'calendar-days', options: { class: "h-4 w-4 mr-1" } %>
+                  <%= exchange.happened_at.to_fs(:long) %>
+                </p>
+              </div>
+              <% exchange.meta.each do |meta| %>
+                <h3 class="mt-4 text-base font-semibold leading-6 text-gray-900" id="modal-title"><%= meta["name"] %></h3>
+                <div class="mt-2 text-sm text-gray-500">
+                  <%= meta["content"].html_safe %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-md sm:mt-16 sm:w-full sm:p-6">
+    <h2 class="font-semibold text-xl text-gray-800 pb-3">Delete market member</h2>
+    <p class="py-6 text-gray-500 border-t border-gray-200">Once you delete the market member, there is no going back. Please be certain.</p>
+    <%= button_to 'Destroy this Market Member', market_member_path(@market_member), method: :delete, class: "btn-danger btn-small" %>
+  </div>
 </div>
 

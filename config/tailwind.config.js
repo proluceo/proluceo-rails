@@ -7,6 +7,7 @@ module.exports = {
     "./app/views/**/*.{erb,haml,html,slim}",
     "./app/components/**/*.{erb,haml,html,slim}",
   ],
+  safelist: ["bg-amber-500", "bg-teal-400", "bg-blue-500"],
   theme: {
     extend: {
       fontFamily: {
