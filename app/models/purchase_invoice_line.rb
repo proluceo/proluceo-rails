@@ -1,5 +1,5 @@
 class PurchaseInvoiceLine < ApplicationRecord
-  self.primary_keys = [:purchase_invoice_id, :account_number]
+  self.primary_key = [:purchase_invoice_id, :account_number]
   self.schema = :accounting
   belongs_to :purchase_invoice, optional: true
   belongs_to :company

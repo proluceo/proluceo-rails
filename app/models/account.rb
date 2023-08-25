@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  self.primary_keys = :company_id, :number
+  self.primary_key = :company_id, :number
   self.schema = :accounting
 
   belongs_to :company
