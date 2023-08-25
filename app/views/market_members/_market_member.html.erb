@@ -16,10 +16,10 @@
           <%= market_member.name %>
         </td>
         <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:w-auto sm:max-w-none sm:pl-6">
-          <%= Contact.where(company_id: market_member.company_id, market_member_name: market_member.name).first.full_name %>
+          <%= market_member.contacts.first.full_name %>
         </td>
         <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:w-auto sm:max-w-none sm:pl-6">
-          <%= Contact.where(company_id: market_member.company_id, market_member_name: market_member.name).first.work_email %>
+          <%= market_member.contacts.first.work_email %>
         </td>
         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
           <% if action_name != "show" %>
