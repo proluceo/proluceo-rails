@@ -18,6 +18,7 @@ default: &default
   adapter: postgresql
   host: 100.86.232.70
   database: proluceo
+  use_metadata_table: false
 
 development:
   <<: *default

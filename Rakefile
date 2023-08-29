@@ -4,3 +4,11 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+# Disable migration system entirely
+Rake::Task.tasks.each do |t|
+  if t.name[0,3] == "db:"
+      t.clear
+      t.add_description("Migration system disabled")
+  end
+end
