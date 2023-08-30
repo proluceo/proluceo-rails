@@ -29,6 +29,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.current_company_id
+    return nil unless defined?(@@current_company_id)
     @@current_company_id
   end
 
@@ -38,7 +39,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   private
   def set_company_id
-    self.company_id = self.class.current_company_id
+    self.company_id = self.class.current_company_id unless self.is_a?(Company)
   end
 
   # Set table name from given schema and model name derived table

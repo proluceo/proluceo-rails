@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.2"
 
 # Rails with custom actiontext
-gem "rails", github: "brunoenten/rails", branch: "actiontext-column"
+gem "rails", github: "brunoenten/rails", branch: "main"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -87,10 +87,11 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  # Populate env variables from file
-  gem 'dotenv-rails'
-
-
   gem "erb-formatter"
   gem "solargraph"
+end
+
+group :development, :debug do
+  # Populate env variables from file
+  gem 'dotenv-rails'
 end

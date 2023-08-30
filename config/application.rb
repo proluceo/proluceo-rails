@@ -33,6 +33,12 @@ module ProluceoRails
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    console do
+      require 'console_extension' # lib/console_extension.rb
+      Rails::ConsoleMethods.send :include, ConsoleExtension::ConsoleHelpers
+      Rails::ConsoleMethods.send :extend, ConsoleExtension::ConsoleMethods
+    end
   end
 end
 require "view_component"

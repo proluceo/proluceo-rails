@@ -16,7 +16,8 @@
 #
 default: &default
   adapter: postgresql
-  host: 100.86.232.70
+  host: <%= ENV['RAILS_DB_HOST'] %>
+  port: <%= ENV['RAILS_DB_PORT'] %>
   database: proluceo
   use_metadata_table: false
 
@@ -24,13 +25,11 @@ development:
   <<: *default
   username: authenticator
   password: yomama
-  port: 5432
 
 debug:
   <<: *default
   username: proluceo
   password: choucroute
-  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

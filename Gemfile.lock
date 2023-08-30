@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/brunoenten/rails.git
-  revision: bcaf968cd06416ce2220dd6070db4ae8390161ea
-  branch: actiontext-column
+  revision: f890a813ba6ab6c65c3bfa22ab41695ff015d76c
+  branch: main
   specs:
     actioncable (7.1.0.alpha)
       actionpack (= 7.1.0.alpha)
@@ -68,6 +68,7 @@ GIT
       marcel (~> 1.0)
     activesupport (7.1.0.alpha)
       base64
+      bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
       connection_pool (>= 2.2.5)
       drb
@@ -124,6 +125,7 @@ GEM
     backport (1.2.0)
     base64 (0.1.1)
     benchmark (0.2.1)
+    bigdecimal (3.1.4)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
