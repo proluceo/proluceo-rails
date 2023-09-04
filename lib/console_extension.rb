@@ -11,7 +11,7 @@ module ConsoleExtension
       print "Select active company (Enter for default): "
       choice = gets.chomp.to_i
       if selected_company = companies[choice]
-        ApplicationRecord.current_company_id = selected_company
+        ApplicationRecord.current_company_id = selected_company.id
       else
         puts "Invalid entry"
       end
