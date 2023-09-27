@@ -1,6 +1,6 @@
   <div id="<%= dom_id account %>" class="account-table account-line min-w-full text-sm group hover:bg-gray-50">
     <div class="flex justify-start items-center"><%= account.company_id %></div>
-    <div class="flex justify-start items-center">C<%= account.number %></div>
+    <div class="flex justify-start items-center"><%= account.number %></div>
     <%= turbo_frame_tag account do %>
       <div><%= link_to account.label, edit_account_path(account), class: "hover:text-blue-600 hover:underline" %></div>
     <% end %>

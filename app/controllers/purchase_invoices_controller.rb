@@ -13,7 +13,6 @@ class PurchaseInvoicesController < ApplicationController
   # GET /purchase_invoices/new
   def new
     @purchase_invoice = PurchaseInvoice.new_with_last_invoice_defaults(document_id: params[:document_id])
-    @account = Account.where(number: @purchase_invoice.payment_account_number).first
   end
 
   # GET /purchase_invoices/1/edit
