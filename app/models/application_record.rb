@@ -7,8 +7,9 @@ class ApplicationRecord < ActiveRecord::Base
 
   # Until default_order has been propertly implemented in ActiveRecord
   default_scope -> { order(primary_key) }
-
   before_validation :set_company_id
+
+  delegate :current_company_id, to: :class
 
 
   ## FSM
@@ -16,25 +17,29 @@ class ApplicationRecord < ActiveRecord::Base
   self.ignored_columns += [:fsm_events]
   # Current state of FSM is read only
   attr_readonly :fsm_current_state
-  # Add event to entry
 
+  # Add event to entry
   def append_fsm_event(event_name)
     q = sanitize_sql_array(["SELECT fsm.append_event(?,?,?)", self.class.table_name, id, event_name])
     ActiveRecord::Base.connection.execute(q)
   end
 
-  # Set company_id property to current company_id
-  def self.current_company_id=(current_company_id)
-    @@current_company_id = current_company_id
-  end
 
-  def self.current_company_id
-    return nil unless defined?(@@current_company_id)
-    @@current_company_id
-  end
+  # Company dependency
+  class << self
+    # Set company_id property to current company_id
+    def current_company_id=(current_company_id)
+      @@current_company_id = current_company_id
+    end
 
-  def self.companys
-    where(company_id: current_company_id)
+    def current_company_id
+      return nil unless defined?(@@current_company_id)
+      @@current_company_id
+    end
+
+    def companys
+      where(company_id: current_company_id)
+    end
   end
 
   private

@@ -7,7 +7,10 @@ class LedgerEntry < ApplicationRecord
 
   def self.create_from_parts(parts)
     new_entry_uuid =  Digest::UUID.uuid_v4
-    parts.each { |p| p[:ledger_entry_id] = new_entry_uuid }
-    insert_all(parts, returning: %w[position account_number amount direction ledger_entry_id company_id])
+    augmented_parts = parts.map { |p| p.merge({
+      ledger_entry_id: new_entry_uuid,
+      company_id: current_company_id
+    }) }
+    insert_all(augmented_parts, returning: %w[position account_number amount direction ledger_entry_id company_id])
   end
 end
