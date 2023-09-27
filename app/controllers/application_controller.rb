@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :set_db_credentials
   before_action :set_model_current_company
 
+  after_action :reset_db_connection
+
   rescue_from ActiveRecord::DatabaseConnectionError, with: :refresh_token
 
   def current_company_id
@@ -27,10 +29,8 @@ class ApplicationController < ActionController::Base
     redirect_to '/login' unless current_user
   end
 
-  def set_db_credentials
-    # Connect to db with user credentials once signed in
-    return unless current_user
-    ActiveRecord::Base.establish_connection(
+  def user_db_conf
+    {
       adapter:  'postgresql',
       encoding: 'unicode',
       host:     ENV['RAILS_DB_HOST'],
@@ -39,12 +39,29 @@ class ApplicationController < ActionController::Base
       password: current_user.access_token,
       database: 'proluceo',
       pool: ENV.fetch("RAILS_MAX_THREADS") { 5 }
-    )
+    }
+  end
+
+  def set_db_credentials
+    # Connect to db with user credentials once signed in
+    return reset_db_connection unless current_user
+    ActiveRecord::Base.establish_connection(user_db_conf)
   end
 
   def refresh_token(e)
-    puts e.inspect
+    if e.cause.is_a?(PG::ConnectionBad) && e.cause.message =~ /authentication failed/
+      # Remove the connection from the pool
+      ActiveRecord::Base.remove_connection(user_db_conf)
+      reset_db_connection
+
+      puts e.inspect
+      Rails.logger.info("Token expired for user #{current_user.email}")
+      return redirect_to '/login'
+    end
     raise e
-    return redirect_to '/auth/google_oauth2' if e.message =~ /gruh/
+  end
+
+  def reset_db_connection
+    ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations.find_db_config(Rails.env))
   end
 end

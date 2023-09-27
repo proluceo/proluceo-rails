@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/brunoenten/rails.git
-  revision: f890a813ba6ab6c65c3bfa22ab41695ff015d76c
+  revision: a35a625016405127eecde340e7c002971b0d9735
   branch: main
   specs:
     actioncable (7.1.0.alpha)
@@ -152,8 +152,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
-    globalid (1.1.0)
-      activesupport (>= 5.0)
+    globalid (1.2.0)
+      activesupport (>= 6.1)
     hashie (5.0.0)
     heroicon (1.0.0)
       rails (>= 5.2)
