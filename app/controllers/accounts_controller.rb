@@ -3,11 +3,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.search(params).companys
+    @accounts = Account.search(params)
   end
 
   def search
-    @accounts = Account.search(params).companys
+    @accounts = Account.search(params)
     render layout: false
   end
 
@@ -72,5 +72,5 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:number, :label)
     end
-    include CompanyDependent
+
 end

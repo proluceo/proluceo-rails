@@ -108,6 +108,22 @@ GIT
       rails (~> 7.0, >= 7.0.3)
 
 GIT
+  remote: https://github.com/brunoenten/stimulus_reflex.git
+  revision: 8d754b8074b6144a88e5ba87c1519c626c40247a
+  branch: fix-breaking-issues
+  specs:
+    stimulus_reflex (3.5.0.rc3)
+      actioncable (>= 5.2, < 8)
+      actionpack (>= 5.2, < 8)
+      actionview (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
+      cable_ready (~> 5.0)
+      nokogiri (~> 1.0)
+      rack (>= 2, < 4)
+      railties (>= 5.2, < 8)
+      redis (>= 4.0, < 6.0)
+
+GIT
   remote: https://github.com/omniauth/omniauth.git
   revision: a13cd110beb9538ea51be6c614bf43351c3f4e95
   branch: master
@@ -121,6 +137,9 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    acts_as_tenant (0.6.1)
+      rails (>= 5.2)
+      request_store (>= 1.0.5)
     ast (2.4.2)
     backport (1.2.0)
     base64 (0.1.1)
@@ -130,6 +149,12 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cable_ready (5.0.1)
+      actionpack (>= 5.2)
+      actionview (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
+      thread-local (>= 1.1.0)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -251,9 +276,15 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.4)
+    redis (5.0.7)
+      redis-client (>= 0.9.0)
+    redis-client (0.17.0)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.8)
       io-console (~> 0.5)
+    request_store (1.5.1)
+      rack (>= 1.4)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.6)
@@ -312,6 +343,7 @@ GEM
     tailwindcss-rails (2.0.30-x86_64-linux)
       railties (>= 6.0.0)
     thor (1.2.2)
+    thread-local (1.1.0)
     tilt (2.2.0)
     timeout (0.4.0)
     turbo-rails (1.4.0)
@@ -344,6 +376,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_tenant (~> 0.6.1)
   bootsnap
   debug
   dotenv-rails
@@ -360,6 +393,7 @@ DEPENDENCIES
   solargraph
   sprockets-rails
   stimulus-rails
+  stimulus_reflex!
   strip_attributes
   tailwindcss-rails
   turbo-rails

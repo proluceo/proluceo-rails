@@ -1,7 +1,0 @@
-<div id="<%= new_ledger_entry["ledger_entry_id"] %>" class="ledger-entries-table ledger-entry-line min-w-full text-sm group hover:bg-gray-50">
-  <div class="flex justify-start items-center"><%= new_ledger_entry["position"] %></div>
-  <div class="flex justify-start items-center"><%= new_ledger_entry["account_number"] %><span class="ml-2"><%= Account.where(company_id: new_ledger_entry["company_id"], number: new_ledger_entry["account_number"]).first.label %></span></div>
-  <div class="flex justify-end items-center font-medium"><%= new_ledger_entry["direction"] == "debit" ? number_with_precision(new_ledger_entry["amount"], precision: 2) : "" %></div>
-  <div class="flex justify-end items-center font-medium"><%= new_ledger_entry["direction"] == "credit" ? number_with_precision(new_ledger_entry["amount"], precision: 2) : "" %></div>
-  <div></div>
-</div>

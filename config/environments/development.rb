@@ -17,8 +17,13 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  # Enable memory store for session storage
-  config.cache_store = :memory_store
+  # Enable cache store for session storage
+  if ENV['REDIS_URL']
+    config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
+  else
+    config.cache_store = :memory_store
+  end
+
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -73,4 +78,7 @@ Rails.application.configure do
   # Allow tailscale funnel
   config.hosts << "aero14be-wsl.kiko-agama.ts.net"
   config.hosts << "macbook-pro-de-maxime.tail87b7f.ts.net"
+
+  # Enable web console from funnel
+  config.web_console.permissions = '2a06:c701:9d85:56aa::/64'
 end

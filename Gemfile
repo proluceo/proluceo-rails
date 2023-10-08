@@ -72,6 +72,9 @@ gem 'omniauth-google-oauth2'
 # Strip white spaces before saving model
 gem "strip_attributes"
 
+# Reactivity
+gem "stimulus_reflex", github: "brunoenten/stimulus_reflex", branch: "fix-breaking-issues"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -95,3 +98,5 @@ group :development, :debug do
   # Populate env variables from file
   gem 'dotenv-rails'
 end
+
+gem "acts_as_tenant", "~> 0.6.1"

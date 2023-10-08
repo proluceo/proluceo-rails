@@ -2,13 +2,13 @@
   <%= form_with(model: @line, data: { controller: (@line.persisted? ? 'autosave' : ''), autosave_debounce_value: 1000}) do |form| %>
     <div class="purchase-invoice-line-table min-w-full bg-white" data-controller="purchase-invoice-line-form">
       <div>
-        <%= form.collection_select :account_number, Account.companys, :number, :to_s, { prompt: false }, { id: "#{dom_id(@line)}_account_number", class: "input-sm w-full", data: { 'purchase-invoice-line-form-target' => 'account', action: 'autosave#save purchase-invoice-line-form#focusOnAmount'}}  %>
+        <%= form.collection_select :account_number, Account, :number, :to_s, { prompt: false }, { id: "#{dom_id(@line)}_account_number", class: "input-sm w-full", data: { 'purchase-invoice-line-form-target' => 'account', action: 'autosave#save purchase-invoice-line-form#focusOnAmount'}}  %>
         <%= link_to "New account", new_account_path(target: "#{dom_id(@line)}_account_number"), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
       </div>
       <div><%= form.text_field :amount, { class: "input-sm w-full", data: { 'purchase-invoice-line-form-target' => 'amount', action: 'autosave#save'}} %></div>
       <div><%= form.text_field :tax_rate, { class: "input-sm w-full", data: { action: 'autosave#save'}} %></div>
       <div>
-        <%= form.collection_select :tax_account_number, Account.companys, :number, :to_s, { prompt: false }, { id: "#{dom_id(@line)}_tax_account_number", class: "input-sm w-full", data: { action: 'autosave#save'}}  %>
+        <%= form.collection_select :tax_account_number, Account, :number, :to_s, { prompt: false }, { id: "#{dom_id(@line)}_tax_account_number", class: "input-sm w-full", data: { action: 'autosave#save'}}  %>
         <%= link_to "New account", new_account_path(target: "#{dom_id(@line)}_tax_account_number"), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
       </div>
       <div class="flex justify-end mt-1"><%= @line.amount_with_tax %></div>

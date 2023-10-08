@@ -1,24 +1,33 @@
-<%= form_with model: LedgerEntry.new, id: "form_ledger_entry" do |form| %>
-  <div data-controller="ledger-entry-form">
-    <% @parts.each_with_index do |part, index| %>
-      <div class="ledger-entries-table ledger-entry-part min-w-full" id="ledger_entry_parts_<%= index %>">
-        <%= form.fields_for "parts[#{index}]", part do |part_form| %>
-          <%= part_form.date_field :position, class: "text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full", data: { "ledger-entry-form-target" => "position", action: "ledger-entry-form#checkDate" } %>
-          <div class="relative" id="account_number" data-controller="autocomplete" data-autocomplete-url-value="/accounts/search" role="combobox">
-            <%= part_form.text_field :account_input, class: "text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full", id: "account_input", data: { 'autocomplete-target' => 'input', "ledger-entry-form-target" => "account" } %>
-            <%= part_form.hidden_field :account_number, data: { 'autocomplete-target' => 'hidden' } %>
-            <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
-          </div>
-          <%= part_form.number_field :debit_amount, step: 0.01, class: 'text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none', data: { "ledger-entry-form-target" => "debit", action: "keydown.tab->ledger-entry-form#checkAmount input->ledger-entry-form#checkBalance" } %>
-          <%= part_form.number_field :credit_amount, step: 0.01, class: 'text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none', data: { "ledger-entry-form-target" => "credit", action: "keydown.tab->ledger-entry-form#checkAmount input->ledger-entry-form#checkBalance" } %>
-          <div class="flex justify-end items-center">
-            <%= form.submit "New line", class: "btn-white px-3 py-2 cursor-pointer" %>
-          </div>
-        <% end %>
-      </div>
+<%= form_with model: ledger_entry, id: "form_ledger_entry", data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |form| %>
+  <div class="ledger-entries-table ledger-entry-part min-w-full" id="<%= dom_id form.object %>">
+    <%= form.date_field :value_on, class: "text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full", data: { "ledger-entry-form-target" => "valueOn", action: "ledger-entry-form#checkDate" } %>
+    <%= form.text_field :label, class: "text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full", data: { "ledger-entry-form-target" => "label" } %>
+  </div>
+  <!-- Template for new part -->
+  <template data-nested-form-target="template">
+    <%= form.fields_for :parts, LedgerEntryPart.new, child_index: 'NEW_RECORD' do |part_fields| %>
+      <%= render "part_form", form: part_fields %>
     <% end %>
-    <div class="ledger-entries-table min-w-full">
-      <%= form.submit "Create Ledger Entry", class: "btn-primary w-full", data: { "ledger-entry-form-target" => "formSubmit" } %>
-    </div>
+  </template>
+
+  <!-- Existing parts -->
+  <% ledger_entry.parts.each do |part| %>
+    <%= form.fields_for :parts do |part_fields| %>
+      <%= render "part_form", form: part_fields %>
+    <% end %>
+  <% end %>
+
+  <!-- Target for new line insertion -->
+  <div data-nested-form-target="target"></div>
+
+  <div class="mt-6">
+    <button type="button" data-action="nested-form#add" class="btn-primary btn-small inline-flex items-center gap-x-1.5">
+      <%= heroicon "plus", options: { class: "h-5 w-5 -ml-0.5" } %>
+      Add Line
+    </button>
+  </div>
+
+  <div class="ledger-entries-table min-w-full">
+    <%= form.submit "Create Ledger Entry", class: "btn-primary w-full", data: { "ledger-entry-form-target" => "formSubmit" } %>
   </div>
 <% end %>

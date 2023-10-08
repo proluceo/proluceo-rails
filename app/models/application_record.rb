@@ -1,16 +1,13 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
-  @@current_company_id
-
   # Strip white spaces
   strip_attributes
 
+  # Scope by company
+  acts_as_tenant(:company)
+
   # Until default_order has been propertly implemented in ActiveRecord
-  default_scope -> { order(primary_key) }
-  before_validation :set_company_id
-
-  delegate :current_company_id, to: :class
-
+  default_scope -> { order(Arel.sql("#{self.name.tableize}.#{Array(primary_key).first}")) }
 
   ## FSM
   # FSM events  should never be accessed outside of postgres
@@ -25,27 +22,8 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
 
-  # Company dependency
-  class << self
-    # Set company_id property to current company_id
-    def current_company_id=(current_company_id)
-      @@current_company_id = current_company_id
-    end
-
-    def current_company_id
-      return nil unless defined?(@@current_company_id)
-      @@current_company_id
-    end
-
-    def companys
-      where(company_id: current_company_id)
-    end
-  end
 
   private
-  def set_company_id
-    self.company_id = self.class.current_company_id unless self.is_a?(Company)
-  end
 
   # Set table name from given schema and model name derived table
   def self.schema=(schema)

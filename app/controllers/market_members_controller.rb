@@ -55,5 +55,5 @@ class MarketMembersController < ApplicationController
     def market_member_params
       filtered_params = params.require(:market_member).permit([:name, contacts_attributes: [:first_name, :last_name, :work_email, :phone]])
     end
-  include CompanyDependent
+
 end

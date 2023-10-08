@@ -3,7 +3,7 @@ class LedgerEntriesController < ApplicationController
 
   # GET /ledger_entries
   def index
-    @ledger_entries = LedgerEntry.companys
+    @ledger_entries = LedgerEntry.eager_load(parts: [:account])
   end
 
   # GET /ledger_entries/1
@@ -11,8 +11,7 @@ class LedgerEntriesController < ApplicationController
 
   # GET /ledger_entries/new
   def new
-    # @ledger_entry = LedgerEntry.new
-    @parts = [LedgerEntry.new, LedgerEntry.new]
+    @ledger_entry = LedgerEntry.new
   end
 
   # GET /ledger_entries/1/edit
@@ -20,47 +19,27 @@ class LedgerEntriesController < ApplicationController
 
   # POST /ledger_entries
   def create
-    parts_attributes = ledger_entry_params[:parts].values
-
-    if adding_new_line?
-      @parts = []
-      parts_attributes.each do |part|
-        @parts << LedgerEntry.new(part)
-      end
-      @parts << LedgerEntry.new
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: [
-          turbo_stream.update("new_ledger_entry_form", partial: "ledger_entries/form", locals: { parts: @parts })
-        ]}
-      end
-      return
-    end
-
-    # Set amount and position attributes based on credit and debit amount
-    parts = []
-    parts_attributes.each do |part|
-      part.delete(:account_input)
-      if part[:credit_amount].present?
-        part[:amount] = part[:credit_amount]
-        part[:direction] = "credit"
-        part.delete(:credit_amount)
-      elsif part[:debit_amount].present?
-        part[:amount] = part[:debit_amount]
-        part[:direction] = "debit"
-        part.delete(:debit_amount)
-      end
-      part[:company_id] = current_company_id
-      parts << part
-    end
+    @ledger_entry = LedgerEntry.new(ledger_entry_params)
+    puts @ledger_entry.parts.inspect
+    success = @ledger_entry.save
 
     respond_to do |format|
-      if ledger_entries = LedgerEntry.create_from_parts(parts)
-        format.turbo_stream { render turbo_stream: [
-          turbo_stream.prepend("ledger_entries", partial: "ledger_entries/new_ledger_entry", collection: ledger_entries.to_a),
-          turbo_stream.remove("form_ledger_entry")
-        ]}
-      else
-        render :new, status: :unprocessable_entity
+      format.turbo_stream do
+        if success
+          render turbo_stream: [
+            turbo_stream.prepend("ledger_entries", partial: "ledger_entries/ledger_entry", locals: { ledger_entry: @ledger_entry }),
+            turbo_stream.remove("form_ledger_entry")
+          ]
+        else
+          render turbo_stream: [ turbo_stream.prepend("ledger_entries", partial: "ledger_entries/ledger_entry", locals: { ledger_entry: @ledger_entry }) ]
+        end
+      end
+      format.html do
+        if success
+          return redirect_to ledger_entries_path
+        else
+          render :new, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -89,13 +68,12 @@ class LedgerEntriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def ledger_entry_params
-    params.require(:ledger_entry).permit(parts: [:position, :account_input, :account_number, :debit_amount, :credit_amount])
-    # params.fetch(:ledger_entry, {})
+    params.require(:ledger_entry).permit([:value_on, :label, parts_attributes: [:account_number, :account_input, :debit_amount, :credit_amount]])
   end
 
   def adding_new_line?
     params[:commit] == "New line"
   end
 
-  include CompanyDependent
+
 end

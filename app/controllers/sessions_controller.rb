@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :auth_user
-  skip_before_action :set_model_current_company
+  skip_before_action :set_current_tenant
+  skip_before_action :set_current_user
   skip_before_action :set_db_credentials
 
   def new

@@ -61,5 +61,5 @@ class PurchaseInvoicesController < ApplicationController
     def purchase_invoice_params
       filtered_params = params.require(:purchase_invoice).permit(:issued_on, :supplier_name, :reference, :payment_account_number, :paid_on, :document_id, :currency, lines_attributes: [:account_number, :amount, :tax_rate, :tax_account_number])
     end
-  include CompanyDependent
+
 end

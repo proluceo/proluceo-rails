@@ -3,7 +3,9 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   def index
-    @companies = Company.all
+    ActsAsTenant.without_tenant do
+      @companies = Company.all
+    end
   end
 
   # GET /companies/1

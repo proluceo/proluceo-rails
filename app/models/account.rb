@@ -9,9 +9,13 @@ class Account < ApplicationRecord
     number.to_s + ' ' + label
   end
 
-  def self.search(params)
-    params[:q].blank? ? all : where(
-      "label ILIKE ? OR cast(number as text) ILIKE ?", "%#{params[:q]}%", "%#{params[:q]}%"
+  def description
+    to_s
+  end
+
+  def self.search(query)
+    query.blank? ? all : where(
+      "label ILIKE ? OR cast(number as text) ILIKE ?", "%#{query}%", "%#{query}%"
     )
   end
 end

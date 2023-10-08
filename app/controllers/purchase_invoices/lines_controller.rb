@@ -4,7 +4,7 @@ class PurchaseInvoices::LinesController < ApplicationController
   # GET /purchase_invoice_lines
   def index
     @purchase_invoice = PurchaseInvoice.find(params[:purchase_invoice_id])
-    @lines = PurchaseInvoiceLine.companys
+    @lines = PurchaseInvoiceLine
   end
 
   # POST /purchase_invoice_lines
@@ -41,5 +41,5 @@ class PurchaseInvoices::LinesController < ApplicationController
     def line_params
       params.require(:purchase_invoice_line).permit(:company_id, :account_number, :amount, :tax_rate, :tax_account_number)
     end
-    include CompanyDependent
+
 end

@@ -11,7 +11,7 @@ module ConsoleExtension
       print "Select active company (Enter for default): "
       choice = gets.chomp.to_i
       if selected_company = companies[choice]
-        ApplicationRecord.current_company_id = selected_company.id
+        ActsAsTenant.current_tenant = selected_company
       else
         puts "Invalid entry"
       end
@@ -40,7 +40,7 @@ module ConsoleExtension
   # starts, instead of during the earlier load_console stage.
   module ConsoleMethods
     def included(_klass)
-      while ApplicationRecord.current_company_id.nil?
+      while ActsAsTenant.current_tenant.nil?
         ConsoleExtension::ConsoleRunner.new.switch_company
       end
     end

@@ -36,6 +36,4 @@ class DocumentsController < ApplicationController
   def document_params
     params.permit(:file, :authenticity_token).except(:authenticity_token)
   end
-
-  include CompanyDependent
 end

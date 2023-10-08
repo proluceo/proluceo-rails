@@ -20,11 +20,7 @@ module ApplicationHelper
     html.join.html_safe
   end
 
-  def current_user
-    session[:current_user]
-  end
-
   def signedin?
-    !!current_user
+    !!Current.user
   end
 end

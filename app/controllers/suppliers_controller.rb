@@ -1,6 +1,6 @@
 class SuppliersController < ApplicationController
   def index
-    @suppliers = Supplier.search(params).companys
+    @suppliers = Supplier.search(params)
   end
 
   def new
@@ -25,14 +25,14 @@ class SuppliersController < ApplicationController
   end
 
   def search
-    @suppliers = Supplier.search(params).companys
+    @suppliers = Supplier.search(params)
     render layout: false
   end
-  
+
   private
-  
+
   def supplier_params
     params.require(:supplier).permit(:name, :invoices_in)
   end
-  include CompanyDependent
+
 end
