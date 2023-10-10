@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class ApplicationReflex < StimulusReflex::Reflex
+  include DbAuthenticated
   # Put application-wide Reflex behavior and callbacks in this file.
   #
   # Learn more at: https://docs.stimulusreflex.com/guide/reflex-classes
   #
-  delegate :current_user, :current_company_id, to: :connection
+  delegate :current_user, :company_id, to: :connection
 
   before_reflex do
       Current.user = current_user
       set_db_credentials
-      ActsAsTenant.current_tenant = Company.find(current_company_id)
+      ActsAsTenant.current_tenant = Company.find(company_id)
   end
   #
   # To access view helpers inside Reflexes:
