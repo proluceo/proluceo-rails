@@ -13,19 +13,19 @@
       <div class="inline-block min-w-full align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden">
         <div class="min-w-full">
-          <div class="ledger-entries-table min-w-full bg-gray-50 text-sm font-semibold">
+          <div class="grid grid-cols-5 ledger-entries-table min-w-full bg-gray-50 text-sm font-semibold">
             <div>Date</div>
             <div>Label</div>
             <div>Account</div>
             <div class="flex justify-end items-center">Debit</div>
             <div class="flex justify-end items-center">Credit</div>
           </div>
-         <div class="bg-white">
+          <div class="bg-white">
             <div id="ledger_entry_form_block" class="bg-gray-50">
               <%= turbo_frame_tag "new_ledger_entry_form" %>
             </div>
             <div id="ledger_entries">
-              <%= render @ledger_entries %>
+              <%= render partial: 'ledger_entry', collection: @ledger_entries %>
             </div>
           </div>
         </div>

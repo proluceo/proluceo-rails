@@ -3,11 +3,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.search(params)
+    @accounts = Account.search(params[:q])
   end
 
   def search
-    @accounts = Account.search(params)
+    @accounts = Account.search(params[:q])
     render layout: false
   end
 

@@ -15,7 +15,7 @@ class Account < ApplicationRecord
 
   def self.search(query)
     query.blank? ? all : where(
-      "label ILIKE ? OR cast(number as text) ILIKE ?", "%#{query}%", "%#{query}%"
+      "label ILIKE ? OR cast(number as text) ILIKE ?", "%#{query}%", "#{query}%"
     )
   end
 end

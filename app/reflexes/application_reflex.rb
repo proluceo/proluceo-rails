@@ -5,13 +5,13 @@ class ApplicationReflex < StimulusReflex::Reflex
   #
   # Learn more at: https://docs.stimulusreflex.com/guide/reflex-classes
   #
-  # If your ActionCable connection is: `identified_by :current_user`
-  #   delegate :current_user, to: :connection
-  #
-  # current_user delegation allows you to use the Current pattern, too:
-  #   before_reflex do
-  #     Current.user = current_user
-  #   end
+  delegate :current_user, :current_company_id, to: :connection
+
+  before_reflex do
+      Current.user = current_user
+      set_db_credentials
+      ActsAsTenant.current_tenant = Company.find(current_company_id)
+  end
   #
   # To access view helpers inside Reflexes:
   #   delegate :helpers, to: :ApplicationController

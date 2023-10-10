@@ -1,10 +1,10 @@
-<div id="<%= dom_id ledger_entry %>" class="ledger-entries-table ledger-entry-line min-w-full text-sm group hover:bg-gray-50">
-  <div class="flex justify-start items-center row-span-<%= ledger_entry.parts.count %>"><%= ledger_entry.value_on %></div>
-  <div class="flex justify-start items-center row-span-<%= ledger_entry.parts.count %>"><%= ledger_entry.label %></div>
+<div id="<%= dom_id ledger_entry %>" class="ledger-entries-table ledger-entry-line grid grid-cols-5 min-w-full text-sm group hover:bg-gray-50">
+  <div class="justify-start items-center"><%= ledger_entry.value_on %></div>
+  <div class="justify-start items-center overflow-hidden"><%= ledger_entry.label %></div>
   <% ledger_entry.parts.each do |part| %>
-    <div class="flex justify-start items-center"><%= part.account_number %><span class="ml-2"><%= part.account.label %></span></div>
-    <div class="flex justify-end items-center font-medium"><%= part.debit? ? number_with_precision(part.amount, precision: 2) : "" %></div>
-    <div class="flex justify-end items-center font-medium"><%= part.credit? ? number_with_precision(part.amount, precision: 2) : "" %></div>
+    <div class="justify-start items-center overflow-hidden col-start-3"><%= part.account_number %><span class="ml-2"><%= part.account_label %></span></div>
+    <div class="justify-end items-center font-medium col-start-4"><%= number_with_precision(part.debit, precision: 2) %></div>
+    <div class="justify-end items-center font-medium col-start-5"><%= number_with_precision(part.credit, precision: 2) %></div>
   <% end %>
 </div>
 

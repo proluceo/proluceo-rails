@@ -3,7 +3,7 @@ class LedgerEntriesController < ApplicationController
 
   # GET /ledger_entries
   def index
-    @ledger_entries = LedgerEntry.eager_load(parts: [:account])
+    @ledger_entries = FormattedLedgerEntry.order(:value_on)
   end
 
   # GET /ledger_entries/1
@@ -20,18 +20,18 @@ class LedgerEntriesController < ApplicationController
   # POST /ledger_entries
   def create
     @ledger_entry = LedgerEntry.new(ledger_entry_params)
-    puts @ledger_entry.parts.inspect
     success = @ledger_entry.save
 
     respond_to do |format|
       format.turbo_stream do
         if success
           render turbo_stream: [
-            turbo_stream.prepend("ledger_entries", partial: "ledger_entries/ledger_entry", locals: { ledger_entry: @ledger_entry }),
+            turbo_stream.prepend("ledger_entries", partial: "ledger_entries/ledger_entry", locals: { ledger_entry: @ledger_entry.formatted }),
             turbo_stream.remove("form_ledger_entry")
           ]
         else
-          render turbo_stream: [ turbo_stream.prepend("ledger_entries", partial: "ledger_entries/ledger_entry", locals: { ledger_entry: @ledger_entry }) ]
+          #render turbo_stream: [ turbo_stream.prepend("ledger_entries", partial: "ledger_entries/ledger_entry", locals: { ledger_entry: @ledger_entry }) ]
+          render :new, status: :unprocessable_entity
         end
       end
       format.html do

@@ -22,6 +22,10 @@ class LedgerEntry < ApplicationRecord
     false
   end
 
+  def formatted
+    FormattedLedgerEntry.find(ledger_entry_id)
+  end
+
   private
 
   def delete_parts
