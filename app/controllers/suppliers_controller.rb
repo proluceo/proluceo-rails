@@ -25,7 +25,7 @@ class SuppliersController < ApplicationController
   end
 
   def search
-    @suppliers = Supplier.search(params)
+    @suppliers = Supplier.search(params[:q])
     render layout: false
   end
 

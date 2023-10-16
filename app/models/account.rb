@@ -5,6 +5,8 @@ class Account < ApplicationRecord
   belongs_to :company
   has_many :purchase_invoices, class_name: 'PurchaseInvoice', foreign_key: [:company_id, :number]
 
+  self.search_result_attributes = %w(number description)
+
   def to_s
     number.to_s + ' ' + label
   end

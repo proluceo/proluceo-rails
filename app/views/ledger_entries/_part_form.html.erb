@@ -2,7 +2,7 @@
   <div></div>
   <div></div>
   <div>
-    <%= form.select :account_number, [], {}, id: 'account_input', data: {controller: "tom-select", "tom-select-reflex-value" => "TomSelect#lookup", "reflex-serialize-form" => "false"}%>
+    <%= form.select :account_number, [], {}, id: 'account_input', data: {controller: "tom-select", "tom-select-model-value" => "Account", "tom-select-value-value" => "number", "tom-select-label-value" => "description", "reflex-serialize-form" => "false"}%>
   </div>
   <%= form.number_field :debit_amount, step: 0.01, class: 'text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none', data: { "ledger-entry-form-target" => "debit", action: "keydown.tab->ledger-entry-form#checkAmount input->ledger-entry-form#checkBalance" } %>
   <%= form.number_field :credit_amount, step: 0.01, class: 'text-sm block shadow rounded-md border border-gray-200 outline-none px-3 py-2 w-full disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none', data: { "ledger-entry-form-target" => "credit", action: "keydown.tab->ledger-entry-form#checkAmount input->ledger-entry-form#checkBalance" } %>

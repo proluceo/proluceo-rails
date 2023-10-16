@@ -16,9 +16,9 @@ class PurchaseInvoice < ApplicationRecord
     end
 
     def new_with_last_invoice_defaults(new_attributes={})
-      last_invoice = companys.last
+      last_invoice = last
       return new(new_attributes) if last_invoice.nil?
-      new(companys.last.attributes.slice('supplier_name', 'currency', 'payment_account_number').merge(new_attributes))
+      new(last_invoice.attributes.slice('supplier_name', 'currency', 'payment_account_number').merge(new_attributes))
     end
   end
 

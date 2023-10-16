@@ -3,25 +3,25 @@ import TomSelect from 'tom-select'
 
 export default class extends ApplicationController {
   static values = {
-    reflex: String,
-    options: String
+    model: String,
+    value: String,
+    label: String
   }
 
   connect () {
     this.control = new TomSelect(this.element, {
-      valueField: 'number',
-      labelField: 'description',
-      searchField: 'description',
+      valueField: this.valueValue,
+      labelField: this.labelValue,
+      searchField: this.labelValue,
       maxItems: 1,
-      loadThrottle: null,
+      loadThrottle: 50,
       load: this.search,
-      //plugins: ['dropdown_input'],
     })
     super.connect()
   }
 
   search = (search, callback) =>
-    this.stimulate(this.reflexValue, search).then(({ payload }) =>
+    this.stimulate("TomSelect#lookup", this.modelValue, search).then(({ payload }) =>
       callback(payload)
     )
 

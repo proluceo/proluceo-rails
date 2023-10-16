@@ -1,13 +1,8 @@
 <div class="nested-form-wrapper bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl my-6" data-new-record="<%= form.object.new_record? %>">
   <div class="p-6">
 
-    <div class="relative" id="charge_account" data-controller="autocomplete" data-autocomplete-url-value="/accounts/search" role="combobox">
-      <%= form.label :charge_account_id, class: "label" %>
-      <div id="charge_account">
-        <%= form.text_field :account_number, class: "input", data: { 'autocomplete-target' => 'input', 'nested-form-target' => 'firstNestedInput'} %>
-      </div>
-      <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
-      <%= link_to "New account", new_account_path(target: 'charge_account', model: 'purchase_invoice'), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
+    <div class="relative" id="charge_account">
+      <%= form.text_field :account_number, id: 'account_input', data: {controller: "tom-select", "tom-select-model-value" => "Account", "tom-select-value-value" => "number", "tom-select-label-value" => "description", "reflex-serialize-form" => "false"}%>
     </div>
 
     <div class="my-8">
@@ -15,13 +10,8 @@
       <%= form.text_field :amount, class: "input" %>
     </div>
 
-    <div class="my-8 relative" id="tax_account" data-controller="autocomplete" data-autocomplete-url-value="/accounts/search" role="combobox">
-      <%= form.label :tax_account_id, class: "label" %>
-      <div id="tax_account">
-        <%= form.text_field :tax_account_number, class: "input", data: { 'autocomplete-target' => 'input'} %>
-      </div>
-      <ul class="list-group absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
-      <%= link_to "New account", new_account_path(target: 'tax_account', model: 'purchase_invoice_line'), data: { turbo_frame: 'modal' }, class: "link text-sm inline-block mt-2" %>
+    <div class="my-8 relative" id="tax_account">
+      <%= form.text_field :tax_account_number, id: 'account_input', data: {controller: "tom-select", "tom-select-model-value" => "Account", "tom-select-value-value" => "number", "tom-select-label-value" => "description", "reflex-serialize-form" => "false"}%>
     </div>
 
     <div class="my-8">

@@ -6,6 +6,16 @@ class ApplicationRecord < ActiveRecord::Base
   # Scope by company
   acts_as_tenant(:company)
 
+  class << self
+    def search_result_attributes=(attrs)
+      @search_result_attributes = attrs
+    end
+
+    def search_result_attributes
+      @search_result_attributes
+    end
+  end
+
   # Until default_order has been propertly implemented in ActiveRecord
   default_scope -> { order(Arel.sql("#{self.name.tableize}.#{Array(primary_key).first}")) }
 
@@ -21,7 +31,10 @@ class ApplicationRecord < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(q)
   end
 
-
+  # Return values of attributes for a search result
+  def search_result
+    self.class.search_result_attributes.each_with_object({}) { |attr, h| h.merge!(attr => self.send(attr)) }
+  end
 
   private
 
