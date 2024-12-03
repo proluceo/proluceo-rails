@@ -56,7 +56,7 @@
 
 .account-table {
   display: grid;
-  grid-template-columns: 0.8fr 0.8fr 8fr 1fr;
+  grid-template-columns: 0.8fr 1fr 0.8fr 0.8fr 0.8fr;
   column-gap: 2rem;
   align-items: bottom;
   padding: 0.5rem 1rem;

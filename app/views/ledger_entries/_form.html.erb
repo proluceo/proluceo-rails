@@ -11,11 +11,10 @@
   </template>
 
   <!-- Existing parts -->
-  <% ledger_entry.parts.each do |part| %>
+
     <%= form.fields_for :parts do |part_fields| %>
       <%= render "part_form", form: part_fields %>
     <% end %>
-  <% end %>
 
   <!-- Target for new line insertion -->
   <div data-nested-form-target="target"></div>

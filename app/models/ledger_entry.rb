@@ -15,7 +15,6 @@ class LedgerEntry < ApplicationRecord
     augmented_parts = parts.map { |p| p.attributes.merge({
       ledger_entry_id: self.id
     }) }
-
     LedgerEntryPart.insert_all(augmented_parts, returning: %w[account_number amount direction ledger_entry_id company_id])
     true
   rescue ActiveRecord::RecordInvalid

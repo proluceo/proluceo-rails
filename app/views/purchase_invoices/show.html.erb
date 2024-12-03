@@ -6,6 +6,32 @@
 
     <%= render @purchase_invoice %>
 
+  <div class="bg-white shadow overflow-hidden sm:rounded-md my-8">
+    <div id="purchase_invoice_lines">
+      <div class="purchase-invoice-line-table min-w-full bg-gray-50 text-sm font-semibold">
+        <div>Account</div>
+        <div>Amount</div>
+        <div>Tax Rate</div>
+        <div>Tax Account</div>
+        <div>Tax Amount</div>
+        <div class="flex justify-end items-center">After Tax</div>
+        <div></div>
+      </div>
+      <% @purchase_invoice.lines.each do |line| %>
+        <div class="purchase-invoice-line-table min-w-full bg-gray-50 text-sm font-semibold">
+          <div><%= line.account_number %></div>
+          <div><%= number_with_precision(line.amount, precision: 2) %></div>
+          <div><%= line.tax_rate %></div>
+          <div><%= line.tax_account_number %></div>
+          <div><%= number_with_precision(line.tax_amount, precision: 2) %></div>
+          <div><%= number_with_precision(line.amount_with_tax, precision: 2) %></div>
+          <div class="flex justify-end items-center"></div>
+          <div></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
     <%= link_to 'Edit this purchase_invoice', edit_purchase_invoice_path(@purchase_invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this purchase_invoice', purchase_invoice_path(@purchase_invoice), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
@@ -13,3 +39,8 @@
     <%= link_to 'Back to purchase_invoices', purchase_invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
+<% if @purchase_invoice.document_id %>
+    <div class="mx-auto w-full">
+      <%= content_tag :iframe, '', src: document_path(@purchase_invoice.document_id), width: '100%', height: '1000px' %>
+    </div>
+<% end %>

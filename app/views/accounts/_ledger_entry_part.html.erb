@@ -1,0 +1,12 @@
+<div id="<%= dom_id ledger_entry_part %>" class="ledger-entries-table ledger-entry-line grid grid-cols-5 min-w-full text-sm group hover:bg-gray-50">
+  <div class="justify-start items-center"><%= ledger_entry_part.value_on %></div>
+  <div class="justify-start items-center overflow-hidden"><%= ledger_entry_part.label %></div>
+  <div class="justify-end items-center font-medium"><%= number_with_precision(ledger_entry_part.debit, precision: 2, delimiter: ' ') %></div>
+  <div class="justify-end items-center font-medium"><%= number_with_precision(ledger_entry_part.credit, precision: 2, delimiter: ' ') %></div>
+  <div class="justify-end items-center font-medium">
+    <%= number_with_precision(ledger_entry_part.balance, precision: 2, delimiter: ' ') %>
+    <%= link_to 'Edit', edit_ledger_entry_path(ledger_entry_part.ledger_entry_id) %>
+  </div>
+</div>
+
+

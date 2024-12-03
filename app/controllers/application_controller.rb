@@ -39,10 +39,15 @@ class ApplicationController < ActionController::Base
       # Remove the connection from the pool
       ActiveRecord::Base.remove_connection(user_db_conf)
       reset_db_connection
-
-      puts e.inspect
       Rails.logger.info("Token expired for user #{Current.user.email}")
-      return redirect_to '/login'
+      if Current.user.refresh_token!
+        # Token refreshed, reload current path
+        session[:current_user] = Current.user
+        return redirect_to request.env['PATH_INFO']
+      else
+        # Could not refresh token, go back to login
+        return redirect_to '/login'
+      end
     end
     raise e
   end

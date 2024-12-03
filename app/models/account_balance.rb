@@ -1,4 +1,4 @@
-class Account < ApplicationRecord
+class AccountBalance < ApplicationRecord
   self.primary_key = :company_id, :number
   self.schema = :accounting
 

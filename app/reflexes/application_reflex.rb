@@ -11,9 +11,14 @@ class ApplicationReflex < StimulusReflex::Reflex
 
   before_reflex do
     Current.user = current_user
-    set_db_credentials
-    tries = 0
-    ActsAsTenant.current_tenant = Company.find(company_id)
+    begin
+      set_db_credentials
+      ActsAsTenant.current_tenant = Company.find(company_id)
+    rescue PG::ConnectionBad => e
+      raise unless e.cause.message =~ /authentication failed/
+      raise unless Current.user.refresh_token!
+      retry
+    end
   end
   #
   # To access view helpers inside Reflexes:

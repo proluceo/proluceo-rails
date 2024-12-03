@@ -15,8 +15,21 @@ class User
     user = new(h.slice(*ATTRS))
     # Store token in db
     user.store_user_token
-
     user
+  end
+
+  def refresh_token!
+    return false unless refresh_token.present?
+    client = OmniAuth::Strategies::GoogleOauth2.new(Rails.application, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']).client
+    new_token = OAuth2::AccessToken.new(client, token, {refresh_token: refresh_token}).refresh!
+    self.token = new_token.token
+    self.refresh_token = new_token.refresh_token
+    self.expires_at = new_token.expires_at
+    store_user_token
+    return true
+    rescue RuntimeError => e
+      return false if e.message == 'A refresh_token is not available'
+      raise
   end
 
   def store_user_token
@@ -33,6 +46,7 @@ class User
       )
     ]
 
-    ActiveRecord::Base.connection.exec_query(query, 'SQL', binds)
+    self.refresh_token = ActiveRecord::Base.connection.exec_query(query, 'SQL', binds).last['store_user_token']
+    true
   end
 end

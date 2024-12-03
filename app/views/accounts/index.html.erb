@@ -22,24 +22,24 @@
   <div class="mt-8 flow-root">
     <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full align-middle sm:px-6 lg:px-8">
-        <div class="overflow-hidden">
         <div class="min-w-full">
-          <div class="account-table min-w-full bg-gray-50 text-sm font-semibold">
-            <div>Company</div>
+          <div class="account-table min-w-full grid-cols-6 bg-gray-50 text-sm font-semibold">
             <div>Number</div>
             <div>Label</div>
+            <div>Debit</div>
+            <div>Credit</div>
+            <div>Balance</div>
             <div><span class="sr-only">Edit</span></div>
-          </div> 
-         <div class="bg-white">
+          </div>
+          <div class="bg-white">
             <%= turbo_frame_tag "new_account_form" %>
             <%= turbo_frame_tag "search_accounts" do %>
               <div id="accounts">
-                <%= render @accounts %>
+                <%= render partial: 'account', collection: @accounts %>
               </div>
             <% end %>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </div>

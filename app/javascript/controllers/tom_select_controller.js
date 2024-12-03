@@ -5,18 +5,29 @@ export default class extends ApplicationController {
   static values = {
     model: String,
     value: String,
-    label: String
+    label: String,
+    selected: String
   }
 
   connect () {
-    this.control = new TomSelect(this.element, {
+    var settings = {
       valueField: this.valueValue,
       labelField: this.labelValue,
       searchField: this.labelValue,
       maxItems: 1,
       loadThrottle: 50,
       load: this.search,
-    })
+    }
+    if (this.selectedValue != '') {
+      var initial_option = {}
+      initial_option[this.valueValue] = this.selectedValue
+      initial_option[this.labelValue] = this.selectedValue
+
+      settings['items'] = [this.selectedValue]
+      settings['options'] = [initial_option]
+    }
+
+    this.control = new TomSelect(this.element, settings)
     super.connect()
   }
 

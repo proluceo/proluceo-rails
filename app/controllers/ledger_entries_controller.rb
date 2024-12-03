@@ -4,6 +4,7 @@ class LedgerEntriesController < ApplicationController
   # GET /ledger_entries
   def index
     @ledger_entries = FormattedLedgerEntry.order(:value_on)
+    @ledger_entries = @ledger_entries.for_account(params[:account_number].to_i)
   end
 
   # GET /ledger_entries/1
@@ -46,6 +47,9 @@ class LedgerEntriesController < ApplicationController
 
   # PATCH/PUT /ledger_entries/1
   def update
+    # TODO: Warning, possible SQL injection risk. Also missing tenant scope enforcement.
+    ActiveRecord::Base.connection.execute("DELETE FROM accounting.ledger_entry_parts WHERE ledger_entry_id='#{@ledger_entry.ledger_entry_id}'")
+    @ledger_entry.parts.reset
     if @ledger_entry.update(ledger_entry_params)
       redirect_to @ledger_entry, notice: 'Ledger entry was successfully updated.'
     else

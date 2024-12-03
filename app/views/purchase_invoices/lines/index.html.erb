@@ -10,7 +10,7 @@
         <div class="flex justify-end items-center">After Tax</div>
         <div></div>
       </div>
-      <%= render(PurchaseInvoiceLineComponent.with_collection(@lines, editable: true)) %>
+      <%= render(PurchaseInvoiceLineComponent.with_collection(@purchase_invoice.lines, editable: true)) %>
       <%= render(PurchaseInvoiceLineComponent.new(line: PurchaseInvoiceLine.new, editable: true)) %>
     </div>
   </div>

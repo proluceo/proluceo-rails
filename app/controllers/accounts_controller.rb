@@ -3,7 +3,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.search(params[:q])
+    #.where("sum_credit IS NOT NULL OR sum_debit IS NOT NULL")
+    @accounts = AccountBalance.search(params[:q]).order("number::text")
   end
 
   def search
@@ -28,16 +29,20 @@ class AccountsController < ApplicationController
 
   # POST /accounts
   def create
-    @account = Account.new(account_params)
+    account = Account.new(account_params)
     @target = params[:target]
     @model = params[:model]
 
+    success = account.save
+
     respond_to do |format|
-      if @account.save and @target.present?
+      @account = AccountBalance.where(number: account.number).first
+      if success and @target.present?
         format.turbo_stream
-      elsif @account.save
-        format.turbo_stream { render turbo_stream: [turbo_stream.prepend("accounts", @account), turbo_stream.remove("form_account")] }
+      elsif success
+        format.turbo_stream { render turbo_stream: [turbo_stream.prepend("accounts", partial: 'accounts/account', locals: {account: @account}), turbo_stream.remove("form_account")] }
       else
+        @account = account
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
@@ -65,7 +70,7 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+      @account = Account.find(params.extract_value(:id))
     end
 
     # Only allow a list of trusted parameters through.

@@ -18,7 +18,13 @@ class PurchaseInvoice < ApplicationRecord
     def new_with_last_invoice_defaults(new_attributes={})
       last_invoice = last
       return new(new_attributes) if last_invoice.nil?
-      new(last_invoice.attributes.slice('supplier_name', 'currency', 'payment_account_number').merge(new_attributes))
+      new_invoice = new(last_invoice.attributes.slice('supplier_name', 'currency', 'payment_account_number').merge(new_attributes))
+      last_invoice.lines.each do |line|
+        new_line = line.clone
+        new_line.purchase_invoice_id = nil
+        new_invoice.lines << new_line
+      end
+      new_invoice
     end
   end
 

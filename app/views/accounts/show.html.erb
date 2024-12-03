@@ -1,0 +1,29 @@
+<div class="w-full">
+  <div class="pb-5 border-b border-gray-200 flex justify-between items-center">
+    <h1 class="heading-1"><%= @account.description %></h1>
+  </div>
+
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+        <div class="min-w-full">
+          <div class="grid grid-cols-5 ledger-entries-table min-w-full bg-gray-50 text-sm font-semibold">
+            <div>Date</div>
+            <div>Label</div>
+            <div class="flex justify-end items-center">Debit</div>
+            <div class="flex justify-end items-center">Credit</div>
+            <div class="flex justify-end items-center">Balance</div>
+          </div>
+          <div class="bg-white">
+            <div id="ledger_entries">
+              <%= render partial: 'ledger_entry_part', collection: @account.formatted_ledger_entry_parts.where("value_on BETWEEN '2021-01-01' AND '2022-12-31'") %>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+

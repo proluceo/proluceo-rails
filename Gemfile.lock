@@ -109,7 +109,7 @@ GIT
 
 GIT
   remote: https://github.com/brunoenten/stimulus_reflex.git
-  revision: 8d754b8074b6144a88e5ba87c1519c626c40247a
+  revision: 09cadff374917fded0cb14fb9c27dd6db9b13039
   branch: fix-breaking-issues
   specs:
     stimulus_reflex (3.5.0.rc3)
